@@ -1,0 +1,25 @@
+{
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Netsteps\\Base\\": ""
+        }
+    },
+    "description": "Netsteps base module with abstractions",
+    "license": [
+        "proprietary"
+    ],
+    "name": "netsteps/module-base",
+    "require": {
+        "magento/framework": ">100.0",
+        "php": "~7.1|~7.2|~7.3|~7.4|~8.0|~8.1"
+    },
+    "support": {
+        "email": "k.tsiapalis86@gmail.com",
+        "docs": "https://netsteps.atlassian.net/wiki/spaces/DEV/overview"
+    },
+    "type": "magento2-module",
+    "version": "1.1.0"
+}

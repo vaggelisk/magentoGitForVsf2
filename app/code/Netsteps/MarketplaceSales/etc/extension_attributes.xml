@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright k.tsiapalis86@gmail.com
+ * @package Netsteps_MarketplaceSales
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <!-- Set seller id and/or seller_info data in cart item -->
+    <extension_attributes for="Magento\Quote\Api\Data\CartItemInterface">
+        <attribute code="seller_id" type="int"/>
+        <attribute code="seller_info" type="Netsteps\MarketplaceSales\Api\Data\OrderItemRegistryInterface">
+            <join reference_table="order_item_seller"
+                  join_on_field="item_id"
+                  reference_field="order_item_id">
+                <field>quote_item_id</field>
+                <field>order_item_id</field>
+                <field>item_seller_id</field>
+                <field>estimated_delivery_id</field>
+                <field>seller_price</field>
+                <field>seller_special_price</field>
+                <field>registered_at</field>
+                <field>parent_order_id</field>
+            </join>
+        </attribute>
+    </extension_attributes>
+
+    <!-- Set seller_items info for order items and marketplace_relation for relation info with other orders -->
+    <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
+        <attribute code="seller_items" type="Netsteps\MarketplaceSales\Api\Data\OrderItemRegistryInterface[]"/>
+        <attribute code="child_orders" type="Netsteps\MarketplaceSales\Api\Data\OrderBasicDataInterface[]" />
+        <attribute code="marketplace_relation" type="Netsteps\MarketplaceSales\Api\Data\OrderRelationInterface">
+            <join reference_table="marketplace_order_relation"
+                  join_on_field="entity_id"
+                  reference_field="magento_order_id">
+                <field>relation_id</field>
+                <field>magento_order_id</field>
+                <field>is_main_order</field>
+                <field>is_processed</field>
+                <field>parent_order_id</field>
+                <field>seller_id</field>
+                <field>relation_created_at</field>
+                <field>relation_updated_at</field>
+            </join>
+        </attribute>
+        <attribute code="number_of_deliveries" type="int" />
+    </extension_attributes>
+
+    <!-- Declare extension attributes for quote item seller required info -->
+    <extension_attributes for="Magento\Quote\Api\Data\ProductOptionInterface">
+        <attribute code="seller_id" type="int" />
+        <attribute code="delivery_id" type="int" />
+    </extension_attributes>
+</config>

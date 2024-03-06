@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_MarketplaceVSFbridge
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Netsteps_MarketplaceVSFbridge" setup_version="1.0.0">
+        <sequence>
+            <module name="Netsteps_Marketplace"/>
+            <module name="Divante_VsbridgeIndexerCore"/>
+        </sequence>
+    </module>
+</config>

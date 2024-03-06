@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_MarketplaceApiAuth
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+   <preference for="Netsteps\MarketplaceApiAuth\Api\SellerAuthorizationInterface"
+               type="Netsteps\MarketplaceApiAuth\Model\SellerAuthorization" />
+</config>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_Marketplace
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Netsteps_Marketplace::main"
+             title="Marketplace"
+             module="Netsteps_Marketplace"
+             parent="Netsteps_Base::netsteps"
+             sortOrder="100"
+             resource="Netsteps_Marketplace::resource"/>
+        <add id="Netsteps_Marketplace::grid"
+             title="Feed History"
+             module="Netsteps_Marketplace"
+             parent="Netsteps_Marketplace::main"
+             sortOrder="100"
+             action="marketplace/feed/grid"
+             resource="Netsteps_Marketplace::seller_actions"/>
+        <add id="Netsteps_Marketplace::upload_feed"
+             title="Upload Feed"
+             module="Netsteps_Marketplace"
+             parent="Netsteps_Marketplace::main"
+             sortOrder="200"
+             action="marketplace/feed/upload"
+             resource="Netsteps_Marketplace::action_upload"/>
+    </menu>
+</config>

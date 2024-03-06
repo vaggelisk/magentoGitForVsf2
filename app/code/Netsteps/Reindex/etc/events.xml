@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_Reindex
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Event that triggers a manually reindex -->
+    <event name="ns_trigger_reindex">
+        <observer name="trigger_custom_reindex_process" instance="Netsteps\Reindex\Observer\ReindexItems" />
+    </event>
+</config>

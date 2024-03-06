@@ -1,0 +1,29 @@
+{
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Netsteps\\MarketplaceApiAuth\\": ""
+        }
+    },
+    "description": "Create an authorization system to check if a token has access to specific api actions.",
+    "license": [
+        "proprietary"
+    ],
+    "name": "netsteps/module-marketplace-api-auth",
+    "require": {
+        "magento/framework": ">100.0",
+        "php": ">= 7.4",
+        "magento/module-backend": "*",
+        "magento/module-webapi": "*",
+        "magento/module-config": "*",
+        "netsteps/module-seller": "*"
+    },
+    "support": {
+        "email": "k.tsiapalis86@gmail.com",
+        "docs": "https://netsteps.atlassian.net/wiki/spaces/DEV/overview"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0"
+}

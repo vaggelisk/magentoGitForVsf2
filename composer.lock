@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59e5de6ed0164067b31711ab4f37e6bf",
+    "content-hash": "74681b9bc100e7b967ccde2dad80899c",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -50,6 +50,52 @@
                 "source": "https://github.com/2tvenom/CBOREncode/tree/1.0.2"
             },
             "time": "2020-10-27T07:22:41+00:00"
+        },
+        {
+            "name": "ampersand/magento2-disable-stock-reservation",
+            "version": "1.2.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmpersandHQ/magento2-disable-stock-reservation.git",
+                "reference": "f21992d300f36ebe33f79091e4883aafed6f51d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmpersandHQ/magento2-disable-stock-reservation/zipball/f21992d300f36ebe33f79091e4883aafed6f51d5",
+                "reference": "f21992d300f36ebe33f79091e4883aafed6f51d5",
+                "shasum": ""
+            },
+            "require": {
+                "magento/framework": ">=103",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "ampersand/magento-docker-test-instance": "^0.1",
+                "codeception/codeception": "^4.1.1",
+                "codeception/module-asserts": "^1.1.0",
+                "codeception/module-db": "^1.0.1",
+                "codeception/module-phpbrowser": "^1.0.0",
+                "codeception/module-rest": "^1.2.0",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "magento/magento-coding-standard": "<16",
+                "tddwizard/magento2-fixtures": "^1.1"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "src/registration.php"
+                ],
+                "psr-4": {
+                    "Ampersand\\DisableStockReservation\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "This module disables the inventory reservation logic introduced as part of MSI in Magento 2.3.3",
+            "support": {
+                "issues": "https://github.com/AmpersandHQ/magento2-disable-stock-reservation/issues",
+                "source": "https://github.com/AmpersandHQ/magento2-disable-stock-reservation/tree/1.2.9"
+            },
+            "time": "2023-08-08T07:11:55+00:00"
         },
         {
             "name": "astock/stock-api-libphp",
@@ -1367,6 +1413,107 @@
                 "source": "https://github.com/DASPRiD/Enum/tree/1.0.3"
             },
             "time": "2020-10-02T16:03:48+00:00"
+        },
+        {
+            "name": "divante/magento2-vsbridge-indexer",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DivanteLtd/magento2-vsbridge-indexer.git",
+                "reference": "b07725ee84db22c6fc76a4214cf27127ccafc37c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DivanteLtd/magento2-vsbridge-indexer/zipball/b07725ee84db22c6fc76a4214cf27127ccafc37c",
+                "reference": "b07725ee84db22c6fc76a4214cf27127ccafc37c",
+                "shasum": ""
+            },
+            "require": {
+                "elasticsearch/elasticsearch": "~5.1|~6.1|~7.1",
+                "magento/framework": ">=101.0.0",
+                "magento/magento-composer-installer": "*",
+                "magento/module-backend": ">=100.2.0",
+                "magento/module-catalog": ">=102.0.0",
+                "magento/module-store": ">=100.2.0",
+                "php": ">=7.0.2"
+            },
+            "type": "magento2-component",
+            "autoload": {
+                "files": [
+                    "src/module-vsbridge-indexer-core/registration.php",
+                    "src/module-vsbridge-indexer-catalog/registration.php",
+                    "src/module-vsbridge-indexer-cms/registration.php",
+                    "src/module-vsbridge-indexer-review/registration.php",
+                    "src/module-vsbridge-indexer-tax/registration.php",
+                    "src/module-vsbridge-downloadable/registration.php",
+                    "src/module-vsbridge-indexer-agreement/registration.php"
+                ],
+                "psr-4": {
+                    "Divante\\VsbridgeIndexerCms\\": "src/module-vsbridge-indexer-cms",
+                    "Divante\\VsbridgeIndexerTax\\": "src/module-vsbridge-indexer-tax",
+                    "Divante\\VsbridgeIndexerCore\\": "src/module-vsbridge-indexer-core",
+                    "Divante\\VsbridgeDownloadable\\": "src/module-vsbridge-downloadable",
+                    "Divante\\VsbridgeIndexerReview\\": "src/module-vsbridge-indexer-review",
+                    "Divante\\VsbridgeIndexerCatalog\\": "src/module-vsbridge-indexer-catalog",
+                    "Divante\\VsbridgeIndexerAgreement\\": "src/module-vsbridge-indexer-agreement"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "magento",
+                "magento2",
+                "vuestorefront"
+            ],
+            "support": {
+                "issues": "https://github.com/DivanteLtd/magento2-vsbridge-indexer/issues",
+                "source": "https://github.com/DivanteLtd/magento2-vsbridge-indexer/tree/2.0.1"
+            },
+            "time": "2020-11-10T09:13:41+00:00"
+        },
+        {
+            "name": "divante/magento2-vsbridge-indexer-msi",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DivanteLtd/magento2-vsbridge-indexer-msi.git",
+                "reference": "86314b13b3d1cd43e2788bdfae47b7a9a367c39a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DivanteLtd/magento2-vsbridge-indexer-msi/zipball/86314b13b3d1cd43e2788bdfae47b7a9a367c39a",
+                "reference": "86314b13b3d1cd43e2788bdfae47b7a9a367c39a",
+                "shasum": ""
+            },
+            "require": {
+                "divante/magento2-vsbridge-indexer": "*",
+                "magento/module-inventory-catalog": "*",
+                "php": ">=7.0.2"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "src/registration.php"
+                ],
+                "psr-4": {
+                    "Divante\\VsbridgeIndexerMsi\\": "/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Agata",
+                    "email": "afirlejczyk@divante.pl"
+                }
+            ],
+            "description": "Extension for magento2-vsbridge-indexer. Support for MSI",
+            "support": {
+                "issues": "https://github.com/DivanteLtd/magento2-vsbridge-indexer-msi/issues",
+                "source": "https://github.com/DivanteLtd/magento2-vsbridge-indexer-msi/tree/0.2.0"
+            },
+            "time": "2020-01-24T22:12:08+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
@@ -26250,5 +26397,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.1.0"
 }

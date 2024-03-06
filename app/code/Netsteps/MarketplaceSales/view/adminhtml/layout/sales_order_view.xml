@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_MarketplaceSales
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <!-- Override default inventory shipping block -->
+            <block class="Netsteps\MarketplaceSales\Block\Adminhtml\Order\View\ShipButton"
+                   name="sales_order_view_ship_button"/>
+        </referenceContainer>
+    </body>
+</page>

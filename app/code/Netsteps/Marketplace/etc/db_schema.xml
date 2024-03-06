@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_Marketplace
+ */
+ -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="seller_product_index" resource="default" engine="innodb" comment="Seller product data">
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID"/>
+        <column xsi:type="int" name="seller_id"  unsigned="true" nullable="false" comment="Seller ID"/>
+        <column xsi:type="varchar" name="ean"  length="80" nullable="true" comment="Product EAN"/>
+        <column xsi:type="decimal" name="price" nullable="false" scale="6" precision="20" unsigned="true" comment="Price"/>
+        <column xsi:type="decimal" name="special_price" nullable="true" scale="6" precision="20" unsigned="false" comment="Special price"/>
+        <column xsi:type="int" name="delivery_id" unsigned="true" nullable="true"  comment="Estimated delivery id"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_PRODUCT_INDEX_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID"
+                    table="seller_product_index" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_PRODUCT_INDEX_SELLER_ID_SELLER_ENTITY_SELLER_ID"
+                    table="seller_product_index" column="seller_id"
+                    referenceTable="seller_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="SELLER_PRODUCT_INDEX_PRODUCT_ID_SELLER_ID_UNIQUE">
+            <column name="product_id"/>
+            <column name="seller_id"/>
+        </constraint>
+    </table>
+
+    <table name="marketplace_feed" resource="default" engine="innodb" comment="Marketplace feed queue">
+        <column xsi:type="int" name="feed_id" unsigned="true" nullable="false" identity="true" comment="Feed ID"/>
+        <column xsi:type="int" name="seller_id" unsigned="true" nullable="false" comment="Seller ID" />
+        <column xsi:type="varchar" name="status" length="30" nullable="false" default="pending" comment="Feed status"/>
+        <column xsi:type="mediumblob" name="feed_data" nullable="false" comment="Feed compressed data"/>
+        <column xsi:type="varchar" name="file_type" length="8" nullable="false" comment="File Type"/>
+        <column xsi:type="varchar" name="feed_type" length="40" nullable="false" comment="Feed Type"/>
+        <column xsi:type="text" name="additional_info" nullable="true" comment="Additional info"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="feed_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_MARKETPLACE_FEED_SELLER_ID_SELLER_ENTITY_ENTITY_ID"
+                    table="marketplace_feed" column="seller_id"
+                    referenceTable="seller_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+    <table name="marketplace_product_index" resource="default" engine="innodb" comment="Product modification index">
+        <column xsi:type="varchar" name="product_sku" nullable="false" length="64" comment="Product SKU"/>
+        <column xsi:type="varchar" name="version_code" nullable="false" length="32" comment="Product version code" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="product_sku"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_MARKETPLACE_PRODUCT_SKU_CATALOG_PRODUCT_SKU"
+                    table="marketplace_product_index" column="product_sku"
+                    referenceTable="catalog_product_entity" referenceColumn="sku"
+                    onDelete="CASCADE"/>
+    </table>
+</schema>

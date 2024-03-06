@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_Marketplace
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Add event to add stock sub action items -->
+    <event name="marketplace_simple_processor_after">
+        <observer name="simple_item_register_stock_data"
+                  instance="Netsteps\Marketplace\Observer\Marketplace\AfterProcessSimpleProduct" />
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="product_check_for_reindex"
+                  instance="Netsteps\Marketplace\Observer\ReindexIfProductUpdated" />
+    </event>
+</config>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author k.tsiapalis86@gmail.com
+ * @copyright Nesteps S.A
+ * @package Netsteps_MarketplaceSales
+ */
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Approve an order -->
+    <route url="/V1/marketplace/order/:orderId/approve" method="POST">
+        <service class="Netsteps\MarketplaceSales\Api\OrderStatusManagementInterface" method="approveByIncrementId"/>
+        <resources>
+            <resource ref="Netsteps_MarketplaceSales::order_approve"/>
+        </resources>
+    </route>
+
+    <!-- Decline an order -->
+    <route url="/V1/marketplace/order/:orderId/decline" method="POST">
+        <service class="Netsteps\MarketplaceSales\Api\OrderStatusManagementInterface" method="declineByIncrementId"/>
+        <resources>
+            <resource ref="Netsteps_MarketplaceSales::order_decline"/>
+        </resources>
+    </route>
+
+    <!-- Ship an order -->
+    <route url="/V1/marketplace/order/:orderId/ship" method="POST">
+        <service class="Netsteps\MarketplaceSales\Model\Order\ShipmentProcessorInterface" method="execute"/>
+        <resources>
+            <resource ref="Netsteps_MarketplaceSales::order_ship"/>
+        </resources>
+    </route>
+
+    <!-- Get order data -->
+    <route url="/V1/marketplace/order/:id" method="GET">
+        <service class="Netsteps\MarketplaceSales\Api\OrderManagementInterface" method="getByIncrementId"/>
+        <resources>
+            <resource ref="Netsteps_MarketplaceSales::order_view"/>
+        </resources>
+    </route>
+
+    <!-- Refund order -->
+    <route url="/V1/marketplace/order/:orderId/refund" method="POST">
+        <service class="Netsteps\MarketplaceSales\Api\OrderManagementInterface" method="refundById"/>
+        <resources>
+            <resource ref="Netsteps_MarketplaceSales::order_refund"/>
+        </resources>
+    </route>
+</routes>

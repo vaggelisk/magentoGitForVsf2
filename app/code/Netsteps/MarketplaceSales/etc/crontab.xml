@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_MarketplaceSales
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="marketplace_sales">
+        <!-- Cron to split orders -->
+        <job instance="Netsteps\MarketplaceSales\Model\Order\SplitOrderManagementInterface" method="splitFull" name="marketplace_sales_split_orders">
+            <schedule>* * * * *</schedule>
+        </job>
+
+        <!-- Cron to send notification email for expired pending approval orders -->
+        <job instance="Netsteps\MarketplaceSales\Model\Process\ExpiredOrders" method="execute" name="marketplace_pending_approval_notification">
+            <schedule>0 8 * * *</schedule>
+        </job>
+    </group>
+</config>

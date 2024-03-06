@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var $block \Netsteps\MarketplaceSales\Block\Email\Order\PendingApproval
+ */
+$orders = $block->getOrders();
+?>
+
+<table class="pending-orders-table">
+    <thead>
+    <tr>
+        <th><?= __('Order Id') ?></th>
+        <th><?= __('Status') ?></th>
+        <th><?= __('Customer Email') ?></th>
+        <th><?= __('Creation Date') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($orders as $order): /** @var $order \Magento\Sales\Model\Order */?>
+        <tr>
+            <td>#<?= $order->getIncrementId() ?></td>
+            <td><?= __(ucwords(mb_ereg_replace('_', ' ', $order->getStatus()))) ?></td>
+            <td><?= $order->getCustomerEmail() ?></td>
+            <td><?= $order->getCreatedAtFormatted(\IntlDateFormatter::MEDIUM) ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

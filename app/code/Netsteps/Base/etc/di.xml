@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 Kostas Tsiapalis. All rights reserved.
+ * @author k.tsiapalis86@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Transform widget image param from directive to image path -->
+    <type name="Magento\Widget\Model\Widget">
+        <plugin name="cms_widget_media"
+                type="Netsteps\Base\Plugin\Widget\Media" sortOrder="100"/>
+    </type>
+    <type name="Magento\Eav\Model\Entity\Attribute\Source\Table">
+        <plugin name="get_option_label_fix" type="Netsteps\Base\Plugin\Attribute\Source\TablePlugin" />
+    </type>
+</config>

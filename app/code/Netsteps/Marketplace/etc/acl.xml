@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_Marketplace
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Netsteps_Marketplace::resource" title="Netsteps Marketplace" sortOrder="100">
+                    <resource id="Netsteps_Marketplace::config" title="System Configuration" sortOrder="10"/>
+                    <resource id="Netsteps_Marketplace::seller_actions" title="Seller Actions" sortOrder="20">
+                        <resource id="Netsteps_Marketplace::action_upload" title="Upload Feed" sortOrder="10"/>
+                        <resource id="Netsteps_Marketplace::attribute_map_apis" title="Attribute Mapping APIS" sortOrder="10"/>
+                    </resource>
+                </resource>
+              </resource>
+        </resources>
+    </acl>
+</config>

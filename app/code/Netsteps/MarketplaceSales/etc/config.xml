@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_MarketplaceSales
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <marketplace>
+            <sales>
+                <disable_stock_revert_order_types>master,split</disable_stock_revert_order_types>
+            </sales>
+            <emails>
+                <approve>
+                    <enable>1</enable>
+                    <sender>sales</sender>
+                    <template>marketplace_emails_approve_template</template>
+                </approve>
+                <decline>
+                    <enable>1</enable>
+                    <sender>sales</sender>
+                    <template>marketplace_emails_decline_template</template>
+                </decline>
+                <pending_approval>
+                    <enable>1</enable>
+                    <sender>sales</sender>
+                    <template>marketplace_emails_pending_approval_template</template>
+                </pending_approval>
+            </emails>
+        </marketplace>
+    </default>
+</config>

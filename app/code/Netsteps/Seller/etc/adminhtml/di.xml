@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Vasilis Neris
+ * @copyright Copyright (c) 2022 Netsteps S.A
+ * @package Netsteps_Seller
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Netsteps\Seller\Model\Admin\SellerManagementInterface"
+                type="Netsteps\Seller\Model\Admin\SellerManagement" />
+
+    <type name="Magento\User\Controller\Adminhtml\User\Save">
+        <plugin name="Netsteps_Seller::attach_seller_to_admin"
+                type="Netsteps\Seller\Plugin\AdminHtml\Controller\User\Save" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Integration\Controller\Adminhtml\Integration\Save">
+        <plugin name="Netsteps_Seller::attach_seller_to_integration"
+                type="Netsteps\Seller\Plugin\AdminHtml\Controller\Integration\Save" sortOrder="10"/>
+    </type>
+
+
+    <type name="Magento\Framework\App\ActionInterface">
+        <plugin name="Netsteps_Seller::attach_seller_to_admin_session" type="Netsteps\Seller\Plugin\AdminHtml\App\Action"/>
+    </type>
+
+</config>

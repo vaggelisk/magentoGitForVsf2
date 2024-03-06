@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Vasilis Neris
+ * @copyright Copyright (c) 2022 Netsteps S.A
+ * @package Netsteps_Seller
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="seller_entity" resource="default" engine="innodb" comment="seller_entity">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" padding="5"
+                 default="0" comment="Enabled or Disabled"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Seller Email"/>
+        <column xsi:type="varchar" name="group" nullable="false" default="merchant" length="255" comment="Seller Group"/>
+        <column xsi:type="varchar" name="source_code" nullable="true" length="255" comment="Source Code"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_ENTITY_SOURCE_CODE_INVENTORY_SOURCE_SOURCE_CODE"
+                    table="seller_entity" column="source_code" referenceTable="inventory_source"
+                    referenceColumn="source_code" onDelete="SET NULL" />
+        <index referenceId="SELLER_ENTITY_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+        <index referenceId="SELLER_ENTITY_UPDATED_AT" indexType="btree">
+            <column name="updated_at"/>
+        </index>
+    </table>
+    <table name="seller_entity_options" resource="default" engine="innodb" comment="Seller Data">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="seller_id" unsigned="true" nullable="false" identity="false" comment="Seller ID"/>
+        <column xsi:type="varchar" name="option_name" nullable="false" length="96" comment="Option Name"/>
+        <column xsi:type="text" name="option_value" nullable="true" comment="Option Value"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="true" identity="false"
+                comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_ENTITY_OPTIONS_SELLER_ENTITY_ENTITY_ID" table="seller_entity_options"
+                    column="seller_id" referenceTable="seller_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_ENTITY_OPTIONS_STORE_STORE_ID" table="seller_entity_options"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="SELLER_ENTITY_OPTIONS_ENTITY_ID_SELLER_ID_STORE_ID">
+            <column name="entity_id"/>
+            <column name="seller_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="SELLER_ENTITY_OPTIONS_SELLER_ID_OPTION_NAME" indexType="btree">
+            <column name="seller_id"/>
+            <column name="option_name"/>
+        </index>
+    </table>
+    <table name="seller_entity_admin_user" resource="default" engine="innodb" comment="Seller Admin User Reference">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="seller_id" unsigned="true" nullable="false" identity="false" comment="Seller ID"/>
+        <column xsi:type="int" name="user_id" unsigned="true" nullable="false" identity="false" comment="User ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_ENTITY_ADMIN_USER_USER_ID_ADMIN_USER_USER_ID" table="seller_entity_admin_user"
+                    column="user_id" referenceTable="admin_user" referenceColumn="user_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_ENTITY_ADMIN_USER_SELLER_ID_SELLER_ENTITY_ENTITY_ID" table="seller_entity_admin_user"
+                    column="seller_id" referenceTable="seller_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="SELLER_ENTITY_ADMIN_USER_SELLER_ID_ADMIN_USER_USER_ID">
+            <column name="seller_id"/>
+            <column name="user_id"/>
+        </constraint>
+    </table>
+
+    <table name="seller_entity_integration" resource="default" engine="innodb" comment="Seller Integrations Relation">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="seller_id" unsigned="true" nullable="false" identity="false" comment="Seller ID"/>
+        <column xsi:type="int" name="integration_id" unsigned="true" nullable="false" identity="false" comment="Integration ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_ENTITY_INTEGRATION_SELLER_ID_SELLER_ENTITY_ENTITY_ID" table="seller_entity_integration"
+        column="seller_id" referenceTable="seller_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_ENTITY_INTEGRATION_INTEGRATION_ID_INTEGRATION_INTEGRATION_ID" table="seller_entity_integration"
+                    column="integration_id" referenceTable="integration" referenceColumn="integration_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="SELLER_ENTITY_INTEGRATION_SELLER_ID_INTEGRATION_ID">
+            <column name="seller_id"/>
+            <column name="integration_id"/>
+        </constraint>
+    </table>
+
+
+    <table name="seller_feeds" resource="default" engine="innodb" comment="Seller Feeds">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="seller_id" unsigned="true" nullable="false" identity="false" comment="Seller ID"/>
+        <column xsi:type="varchar" name="type" length="255" comment="Feed Type"/>
+        <column xsi:type="varchar" name="url_path" length="1024" comment="Feed Url"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="true" identity="false" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_FEEDS_SELLER_ENTITY_ENTITY_ID" table="seller_feeds"
+                    column="seller_id" referenceTable="seller_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="SELLER_FEED_SELLER_ID_TYPE_STORE_ID">
+            <column name="seller_id"/>
+            <column name="type"/>
+            <column name="store_id"/>
+        </constraint>
+    </table>
+
+    <table name="seller_entity_static" resource="default" engine="innodb" comment="Seller Static Fields">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="seller_id" unsigned="true" nullable="false" identity="false" comment="Seller ID"/>
+        <column xsi:type="varchar" name="iban" length="255" comment="Iban"/>
+        <column xsi:type="varchar" name="beneficiary" length="255" comment="Beneficiary Account"/>
+        <column xsi:type="decimal" name="commission" scale="6" precision="20" unsigned="true" nullable="true" comment="Seller Everypay Commission"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_SELLER_ENTITY_STATIC_SELLER_ENTITY_ENTITY_ID" table="seller_entity_static"
+                    column="seller_id" referenceTable="seller_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="SELLER_ENTITY_SELLER_ID_IBAN_BENEFICIARY">
+            <column name="seller_id"/>
+            <column name="iban"/>
+            <column name="beneficiary"/>
+        </constraint>
+    </table>
+
+</schema>

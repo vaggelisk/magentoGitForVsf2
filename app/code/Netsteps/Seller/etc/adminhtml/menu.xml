@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Netsteps_Seller::main"
+             title="Distributors And Merchants"
+             module="Netsteps_Seller"
+             parent="Netsteps_Base::netsteps"
+             translate="title"
+             sortOrder="1"
+             resource="Netsteps_Seller::listing"
+        />
+        <add id="Netsteps_Seller::sellers_grid"
+             title="Sellers"
+             module="Netsteps_Seller"
+             parent="Netsteps_Seller::main"
+             action="sellers/seller/grid"
+             resource="Netsteps_Seller::listing"
+             sortOrder="100"
+        />
+        <add id="Netsteps_Seller::sellers_static_grid"
+             title="Sellers Static Data"
+             module="Netsteps_Seller"
+             parent="Netsteps_Seller::main"
+             action="sellers/sellerstatic/grid"
+             resource="Netsteps_Seller::listing"
+             sortOrder="100"
+        />
+    </menu>
+</config>

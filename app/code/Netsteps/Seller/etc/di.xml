@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Vasilis Neris
+ * @copyright Copyright (c) 2022 Netsteps S.A
+ * @package Netsteps_Seller
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Netsteps\Seller\Api\SellerRepositoryInterface" type="Netsteps\Seller\Model\SellerRepository" />
+    <preference for="Netsteps\Seller\Api\SellerAdminRepositoryInterface" type="Netsteps\Seller\Model\SellerAdminRepository" />
+    <preference for="Netsteps\Seller\Api\SellerFeedRepositoryInterface" type="Netsteps\Seller\Model\SellerFeedRepository" />
+    <preference for="Netsteps\Seller\Api\SellerOptionRepositoryInterface" type="Netsteps\Seller\Model\SellerOptionRepository" />
+    <preference for="Netsteps\Seller\Api\ProductDistributorResolverInterface" type="Netsteps\Seller\Model\ProductDistributorResolver" />
+    <preference for="Netsteps\Seller\Api\SellerStaticRepositoryInterface" type="Netsteps\Seller\Model\SellerStaticRepository" />
+    <preference for="Netsteps\Seller\Api\SellerIntegrationRepositoryInterface" type="Netsteps\Seller\Model\SellerIntegrationRepository" />
+    <preference for="Netsteps\Seller\Model\Admin\SellerManagementInterface" type="Netsteps\Seller\Model\Admin\SellerManagement" />
+    <preference for="Netsteps\Seller\Api\Data\SellerSearchResultsInterface" type="Netsteps\Seller\Model\SellerSearchResults" />
+    <preference for="Netsteps\Seller\Api\Data\SellerInterface" type="Netsteps\Seller\Model\Seller" />
+    <preference for="Netsteps\Seller\Api\Data\SellerAdminInterface" type="Netsteps\Seller\Model\SellerAdmin" />
+    <preference for="Netsteps\Seller\Api\Data\SellerFeedInterface" type="Netsteps\Seller\Model\SellerFeed" />
+    <preference for="Netsteps\Seller\Api\Data\SellerOptionInterface" type="Netsteps\Seller\Model\SellerOption" />
+    <preference for="Netsteps\Seller\Api\Data\SellerStaticInterface" type="Netsteps\Seller\Model\SellerStatic" />
+    <preference for="Netsteps\Seller\Api\Data\SellerIntegrationInterface" type="Netsteps\Seller\Model\SellerIntegration" />
+    <preference for="Netsteps\Seller\Api\Data\SellerIntegrationSearchResultsInterface" type="Netsteps\Seller\Model\SellerIntegrationSearchResults" />
+
+
+    <type name="Magento\User\Block\User\Edit\Tab\Main">
+        <plugin name="Netsteps_Seller::seller_declaration_admin" type="Netsteps\Seller\Plugin\Block\Adminhtml\User\Edit\Tab\SellerField" sortOrder="1"/>
+    </type>
+
+    <type name="Magento\Integration\Block\Adminhtml\Integration\Edit\Form">
+        <plugin name="Netsteps_Seller::seller_integration_relation" type="Netsteps\Seller\Plugin\Block\Adminhtml\Integration\Edit\Form" sortOrder="1"/>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="netsteps:testing_repositories" xsi:type="object">
+                    Netsteps\Seller\Console\RepositoriesTesting
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Assign processors to DeleteObserver class -->
+    <type name="Netsteps\Seller\Observer\AfterDeleteSeller">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="clean_catalog_product_entity_int" xsi:type="object">Netsteps\Seller\Model\Seller\DeleteProcessor\ProcessorCleanEavData</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Sellers Grid Virtual Type and Data source -->
+    <virtualType name="Netsteps\Seller\Ui\Component\Listing\SellersDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="resourceModel" xsi:type="string">Netsteps\Seller\Model\ResourceModel\Seller\Collection</argument>
+            <argument name="mainTable" xsi:type="string">seller_entity</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument xsi:type="array">
+                <item xsi:type="string" name="sellers_sellers_grid_data_source">Netsteps\Seller\Ui\Component\Listing\SellersDataProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Sellers Grid Virtual Type and Data source End -->
+
+    <!-- Sellers Static Grid Virtual Type and Data source -->
+    <virtualType name="Netsteps\Seller\Ui\Component\Listing\SellerStaticDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="resourceModel" xsi:type="string">Netsteps\Seller\Model\ResourceModel\SellerStatic\Collection</argument>
+            <argument name="mainTable" xsi:type="string">seller_entity_static</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument xsi:type="array">
+                <item xsi:type="string" name="sellers_sellerstatic_grid_data_source">Netsteps\Seller\Ui\Component\Listing\SellerStaticDataProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Sellers Static Grid Virtual Type and Data source End -->
+
+
+    <!-- Assign load/save processors for seller and validators-->
+    <type name="Netsteps\Seller\Model\Seller">
+        <arguments>
+            <argument name="loadProcessors" xsi:type="array">
+                <item name="attach_options" xsi:type="object">Netsteps\Seller\Model\Seller\LoadProcessor\AttachOptions</item>
+                <item name="attach_feeds" xsi:type="object">Netsteps\Seller\Model\Seller\LoadProcessor\AttachFeeds</item>
+                <item name="add_extension_attributes" xsi:type="object">Netsteps\Seller\Model\Seller\LoadProcessor\AddExtensionAttributes</item>
+            </argument>
+            <argument name="saveProcessors" xsi:type="array">
+                <item name="save_options" xsi:type="object">Netsteps\Seller\Model\Seller\SaveProcessor\SaveOptions</item>
+                <item name="save_feeds" xsi:type="object">Netsteps\Seller\Model\Seller\SaveProcessor\SaveFeeds</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Assign load/save processors for seller Repo-->
+    <type name="Netsteps\Seller\Model\SellerRepository">
+        <arguments>
+            <argument name="loadProcessors" xsi:type="array">
+                <item name="attach_options" xsi:type="object">Netsteps\Seller\Model\Seller\LoadProcessor\AttachOptions</item>
+                <item name="attach_feeds" xsi:type="object">Netsteps\Seller\Model\Seller\LoadProcessor\AttachFeeds</item>
+                <item name="add_extension_attributes" xsi:type="object">Netsteps\Seller\Model\Seller\LoadProcessor\AddExtensionAttributes</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="sellerImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">logo</argument>
+            <argument name="basePath" xsi:type="string">logo</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Netsteps\Seller\Controller\Adminhtml\Seller\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">sellerImageUpload</argument>
+        </arguments>
+    </type>
+
+</config>

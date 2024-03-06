@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_MarketplaceSales
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Populate relation table for order items with seller data -->
+    <event name="sales_model_service_quote_submit_success">
+        <observer name="register_order_item_seller_relation"
+                  instance="Netsteps\MarketplaceSales\Observer\Order\AfterSubmitSuccessQuote" />
+    </event>
+
+    <!-- Register order for split process -->
+    <event name="checkout_submit_all_after">
+        <observer name="register_order_to_process"
+                  instance="Netsteps\MarketplaceSales\Observer\Order\RegisterToProcess" />
+    </event>
+
+    <!-- Set split flat to order before submit if order coming from a split order process -->
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="set_pending_approve_status_to_order"
+                  instance="Netsteps\MarketplaceSales\Observer\Quote\SetSplitFlagToOrderBeforeSubmit" />
+    </event>
+
+<!--    &lt;!&ndash; Update product seller attributes after master XML full process &ndash;&gt;-->
+<!--    <event name="after_master_process">-->
+<!--        <observer name="update_seller_product_data_after_master_process"-->
+<!--                  instance="Netsteps\MarketplaceSales\Observer\Marketplace\AfterProcessFeed" />-->
+<!--    </event>-->
+
+<!--    &lt;!&ndash; Update product seller attributes after merchant XML full process &ndash;&gt;-->
+<!--    <event name="after_merchant_process">-->
+<!--        <observer name="update_seller_product_data_after_merchant_process"-->
+<!--                  instance="Netsteps\MarketplaceSales\Observer\Marketplace\AfterProcessFeed" />-->
+<!--    </event>-->
+
+    <!-- Add additional variables to new order transactional email -->
+    <event name="email_order_set_template_vars_before">
+        <observer name="add_order_email_additional_variables"
+                  instance="Netsteps\MarketplaceSales\Observer\Order\Email\Variables\AdditionalVariables" />
+    </event>
+</config>

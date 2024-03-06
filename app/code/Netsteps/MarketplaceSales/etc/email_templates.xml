@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_MarketplaceSales
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="marketplace_emails_approve_template"
+              label="Approve Order"
+              file="approve.html"
+              type="html"
+              module="Netsteps_MarketplaceSales"
+              area="frontend"/>
+    <template id="marketplace_emails_decline_template"
+              label="Decline Order"
+              file="decline.html"
+              type="html"
+              module="Netsteps_MarketplaceSales"
+              area="frontend"/>
+    <template id="marketplace_emails_pending_approval_template"
+              label="Pending Approval Order"
+              file="pending_approval.html"
+              type="html"
+              module="Netsteps_MarketplaceSales"
+              area="frontend"/>
+</config>

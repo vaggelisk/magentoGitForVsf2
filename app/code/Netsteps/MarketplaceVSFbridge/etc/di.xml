@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_MarketplaceVSFbridge
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Netsteps\MarketplaceVSFbridge\Model\Product\Attribute\MapperInterface"
+                type="Netsteps\MarketplaceVSFbridge\Model\Product\Attribute\Mapper" />
+
+    <!-- Assign custom mapping to attributes -->
+    <type name="Netsteps\MarketplaceVSFbridge\Model\Product\Attribute\Mapper">
+        <arguments>
+            <argument name="mappings" xsi:type="array">
+                <item name="lowest_seller_data" xsi:type="array">
+                    <item name="product_id" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_INTEGER</item>
+                    <item name="seller_id" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_INTEGER</item>
+                    <item name="ean" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_TEXT</item>
+                    <item name="price" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_DOUBLE</item>
+                    <item name="special_price" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_DOUBLE</item>
+                    <item name="delivery_id" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_INTEGER</item>
+                    <item name="created_at" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_TEXT</item>
+                    <item name="updated_at" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_TEXT</item>
+                    <item name="quantity" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_DOUBLE</item>
+                    <item name="source_code" xsi:type="const">Divante\VsbridgeIndexerCore\Api\Mapping\FieldInterface::TYPE_TEXT</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Create a virtual indexer for product seller data -->
+    <virtualType name="Netsteps\MarketplaceVSFbridge\Model\Indexer\Product"
+                 type="Divante\VsbridgeIndexerCore\Indexer\Base">
+        <arguments>
+            <argument name="typeName" xsi:type="string">product_seller_data</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Assign a rebuild action model for product seller data to rebuild action pool -->
+    <type name="Divante\VsbridgeIndexerCore\Indexer\RebuildActionPool">
+        <arguments>
+            <argument name="actions" xsi:type="array">
+                <item name="product_seller_data" xsi:type="string">Netsteps\MarketplaceVSFbridge\Model\Indexer\Action\ProductData</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Assign modifiers to action model -->
+    <type name="Netsteps\MarketplaceVSFbridge\Model\Indexer\Action\ProductData">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="base" xsi:type="object">Netsteps\MarketplaceVSFbridge\Model\Indexer\Data\Modifier\IndexKey</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add custom field mapping to indexer declaration schema -->
+    <type name="Divante\VsbridgeIndexerCatalog\Index\Mapping\Product">
+        <plugin name="Netsteps_MarketplaceVSFbridge::add_custom_mappings"
+                type="Netsteps\MarketplaceVSFbridge\Plugin\AddSellerAttributeMapping" />
+    </type>
+
+    <!-- Transform mapped attributes into array if needed -->
+    <type name="Divante\VsbridgeIndexerCatalog\Model\ResourceModel\Product\AttributeDataProvider">
+        <plugin name="Netsteps_MarketplaceVSFbridge::transform_attributes"
+                type="Netsteps\MarketplaceVSFbridge\Plugin\DataProvider\TransformDataPlugin" />
+    </type>
+
+    <!-- Modify configurable product data for prices based on children lowest_seller_data -->
+    <type name="Divante\VsbridgeIndexerCatalog\Model\Indexer\DataProvider\Product\Configurable\PrepareConfigurableProduct">
+        <plugin name="Netsteps_MarketplaceVSFbridge::modify_configurable_prices"
+                type="Netsteps\MarketplaceVSFbridge\Plugin\DataProvider\Product\Configurable\ModifyPrices" />
+    </type>
+
+    <!-- Plugin to ignore non visible children from configurable options -->
+    <type name="Divante\VsbridgeIndexerCatalog\Model\Indexer\DataProvider\Product\Configurable\LoadConfigurableOptions">
+        <plugin name="Netsteps_MarketplaceVSFbridge::ignore_non_visible_children"
+                type="Netsteps\MarketplaceVSFbridge\Plugin\ProductData\Configurable\IgnoreNonVisibleProductsFromOptions" />
+    </type>
+</config>

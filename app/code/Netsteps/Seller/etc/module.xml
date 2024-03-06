@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Vasilis Neris
+ * @copyright Copyright (c) 2022 Netsteps S.A
+ * @package Netsteps_Seller
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Netsteps_Seller" setup_version="1.0.9" >
+        <sequence>
+            <module name="Netsteps_Base" />
+            <module name="Magento_Catalog" />
+            <module name="Magento_Sales" />
+        </sequence>
+    </module>
+</config>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_Marketplace
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Setup logger types -->
+    <virtualType name="Netsteps\Marketplace\Model\Handler\Admin" type="Netsteps\Logger\Model\Handler">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/netsteps/admin/marketplace</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Netsteps\Marketplace\Model\Logger\Admin" type="Netsteps\Logger\Model\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">NetstepsMarketplace</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Netsteps\Marketplace\Model\Handler\Admin</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Setup logger types -->
+
+    <!-- Setup arguments to admin controller context -->
+    <type name="Netsteps\Marketplace\Model\Adminhtml\Context">
+        <arguments>
+            <argument name="logger" xsi:type="object">Netsteps\Marketplace\Model\Logger\Admin</argument>
+        </arguments>
+    </type>
+</config>

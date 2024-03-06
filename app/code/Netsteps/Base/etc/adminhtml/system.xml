@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 Kostas Tsiapalis. All rights reserved.
+ * @author k.tsiapalis86@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="netsteps" sortOrder="10000" class="netsteps-tab">
+            <label>Netsteps Extensions</label>
+        </tab>
+    </system>
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Vasilis Neris
+ * @copyright Copyright (c) 2022 Netsteps S.A
+ * @package Netsteps_Seller
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Netsteps_Base::config" title="Netsteps Modules" sortOrder="10"/>
+            </resource>
+        </resources>
+    </acl>
+</config>
+
+
+

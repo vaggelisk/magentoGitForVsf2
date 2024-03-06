@@ -1,0 +1,37 @@
+{
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Netsteps\\MarketplaceSales\\": ""
+        }
+    },
+    "description": "Module to handle sales for netsteps marketplace",
+    "license": [
+        "proprietary"
+    ],
+    "name": "netsteps/module-marketplace-sales",
+    "require": {
+        "php": ">= 7.4",
+        "magento/framework": ">100.0",
+        "magento/module-sales": "*",
+        "magento/module-quote": "*",
+        "magento/module-checkout": "*",
+        "magento/module-webapi": "*",
+        "magento/module-customer": "*",
+        "magento/module-inventory": "*",
+        "magento/module-inventory-shipping-admin-ui": "*",
+        "netsteps/module-reindex": "*",
+        "netsteps/module-seller": "*",
+        "netsteps/module-marketplace": "*",
+        "netsteps/module-marketplace-api-auth": "*",
+        "ampersand/magento2-disable-stock-reservation": "*"
+    },
+    "support": {
+        "email": "k.tsiapalis86@gmail.com",
+        "docs": "https://netsteps.atlassian.net/wiki/spaces/DEV/overview"
+    },
+    "type": "magento2-module",
+    "version": "1.1.0"
+}

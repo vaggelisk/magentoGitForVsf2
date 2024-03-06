@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kostas Tsiapalis
+ * @copyright Netsteps S.A
+ * @package Netsteps_MarketplaceSales
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Validate status management for rest API calls -->
+    <type name="Netsteps\MarketplaceSales\Api\OrderStatusManagementInterface">
+        <plugin name="Netsteps_MarketplaceSales::validate_integration_access"
+                type="Netsteps\MarketplaceSales\Plugin\Marketplace\Webapi\ValidateOrderStatusAccess"/>
+    </type>
+
+    <!-- Validate order data view for rest API calls -->
+    <type name="Netsteps\MarketplaceSales\Model\Marketplace\OrderManagement">
+        <plugin name="Netsteps_MarketplaceSales::validate_order_management_access"
+                type="Netsteps\MarketplaceSales\Plugin\Marketplace\Webapi\ValidateOrderAccess" />
+    </type>
+
+    <!-- Disable free shipping in frontend -->
+    <type name="Magento\OfflineShipping\Model\Carrier\Freeshipping">
+        <plugin name="Netsteps_MarketplaceSales::disable_free_shipping_for_checkout"
+                type="Netsteps\MarketplaceSales\Plugin\Shipping\Carrier\DisableFreeShipping"/>
+    </type>
+</config>

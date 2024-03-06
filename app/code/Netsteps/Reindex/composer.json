@@ -1,0 +1,26 @@
+{
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Netsteps\\Reindex\\": ""
+        }
+    },
+    "description": "Create a hook to use indexers programmatically",
+    "license": [
+        "proprietary"
+    ],
+    "name": "netsteps/module-reindex",
+    "require": {
+        "magento/framework": ">100.0",
+        "php": ">= 7.4",
+        "magento/module-indexer": "*"
+    },
+    "support": {
+        "email": "k.tsiapalis86@gmail.com",
+        "docs": "https://netsteps.atlassian.net/wiki/spaces/DEV/overview"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0"
+}
