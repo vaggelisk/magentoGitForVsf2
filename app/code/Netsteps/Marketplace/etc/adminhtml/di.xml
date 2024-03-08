@@ -25,7 +25,6 @@
         </arguments>
     </virtualType>
     <!-- Setup logger types -->
-
     <!-- Setup arguments to admin controller context -->
     <type name="Netsteps\Marketplace\Model\Adminhtml\Context">
         <arguments>
