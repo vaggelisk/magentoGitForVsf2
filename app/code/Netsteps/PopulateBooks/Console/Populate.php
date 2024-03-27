@@ -183,10 +183,9 @@ class Populate extends Command
                 $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
                 $logger = new Zend_Log();
                 $logger->addWriter($writer);
-                $logger->log("geia sas",2);
+                $logger->log("geia sas",1);
 
                 $this->getAndSaveImage( $pathDir );
-//                print_r($result[0][1]);
                 $output->writeln(' ');
                 foreach ($result[0][1] as $key => $value) {
                     $output->writeln( $key." : ". $value );

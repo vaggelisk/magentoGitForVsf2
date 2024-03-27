@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route method="POST" url="/V1/custom/search-inside/:value">
+        <service class="Netsteps\PopulateBooks\Api\CustomInterface" method="searchBookInOurLibrary"/>
+        <resources>
+             <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/custom/search-outside/:value">
+        <service class="Netsteps\PopulateBooks\Api\CustomInterface" method="searchBookInBiblionet"/>
+        <resources>
+             <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/custom/create-book/:title">
+        <service class="Netsteps\PopulateBooks\Api\CustomInterface" method="createBook"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes>
