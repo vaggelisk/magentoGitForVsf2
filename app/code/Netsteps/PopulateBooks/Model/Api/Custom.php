@@ -123,6 +123,7 @@ class Custom
        */
       public function searchBookInOurLibrary($value)
       {
+          // TODO
           // Edw tha mporouse na ginei kai to search me vash to isbn
           // alla tha apaitouse kai mia 2h proairetikh metavlhth sth synarthsh
           // opou tha eixe thn timh isbn.
@@ -146,15 +147,15 @@ class Custom
               ];
               $results = $client->search($params);
 
+              // to path poy vlepei einai <magento_dir>/pub
+              $title=null;
+              $retval=null;
+              exec('cat /home/kantro/efsyn.txt', $title, $retval);
+              echo "Returned with status $retval and output:\n";
+              echo print_r($title);
 
 
-              $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
-              $logger = new Zend_Log();
-              $logger->addWriter($writer);
-              $logger->log(  print_r('einai logged? ' , 1) ,1);
-
-
-              $response = ['success' => true, 'message' => 'kati ' . $this->make_greeklish($value)];
+              $response = ['success' => true, 'message' => 'h command exei output: '.  '  ' . $this->make_greeklish($value)];
           } catch (\Exception $e) {
                   $response = ['success' => false, 'message' => $e->getMessage()];
         //                  $this->logger->info($e->getMessage());
@@ -202,12 +203,7 @@ class Custom
                         'qty' => 100
                     )
                 );
-//                $product->save();
-
-                $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
-                $logger = new Zend_Log();
-                $logger->addWriter($writer);
-                $logger->log(  print_r('vag' , 1) ,1);
+                $product->save();
 
                 $response = ['success' => true, 'message' => 'A book with sku '. $this->make_greeklish( str_replace(' ', '-', $title) ) . ' created successfully'];
             } catch (\Exception $e) {
