@@ -12,6 +12,12 @@
              <resource ref="anonymous"/>
         </resources>
     </route>
+    <route method="POST" url="/V1/custom/documents/upload" >
+        <service class="Netsteps\PopulateBooks\Api\CustomInterface" method="upload" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
     <route method="POST" url="/V1/custom/create-book/:title">
         <service class="Netsteps\PopulateBooks\Api\CustomInterface" method="createBook"/>
         <resources>

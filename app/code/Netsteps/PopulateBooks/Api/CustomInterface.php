@@ -21,6 +21,14 @@ interface CustomInterface
     */
     public function searchBookInBiblionet($value);
 
+    /**
+     * Upload Pdf
+     *
+     * @return string
+     * @api
+     */
+    public function upload(): string;
+
 
     /**
     * GET for Post api

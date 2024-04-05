@@ -3,6 +3,7 @@
 namespace Netsteps\PopulateBooks\Model\Api;
 
 use Divante\VsbridgeIndexerCore\Elasticsearch\ClientBuilder;
+use Exception;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\App\Http\Context;
 use Magento\Framework\App\ObjectManager;
@@ -13,6 +14,12 @@ use Magento\Integration\Model\Oauth\Token;
 use Psr\Log\LoggerInterface;
 use Zend_Log;
 use Zend_Log_Writer_Stream;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\App\Request\Http;
+use Magento\Framework\Exception\FileSystemException;
+use Magento\Framework\Exception\ValidatorException;
+use Magento\Framework\Filesystem;
+use Magento\MediaStorage\Model\File\UploaderFactory;
 
 class Custom
 {
@@ -41,6 +48,20 @@ class Custom
         "order" => "td",
     );
 
+    public const FILE_TYPE = 'application/pdf';
+
+    /** @var Http */
+    private $request;
+
+    /** @var Filesystem */
+    private $filesystem;
+
+    /** @var UploaderFactory */
+    private $uploaderFactory;
+
+    /** @var Filesystem\Directory\WriteInterface */
+    private $varDirectory;
+
 
 
     /**
@@ -63,6 +84,9 @@ class Custom
     protected Token $token;
 
     public function __construct(
+        Http $request,
+        Filesystem $filesystem,
+        UploaderFactory $uploaderFactory,
         Token $token,
         Context $httpContext,
         CustomerRepositoryInterface $customerRepository,
@@ -70,6 +94,10 @@ class Custom
         LoggerInterface $logger
       )
       {
+          $this->request = $request;
+          $this->filesystem = $filesystem;
+          $this->uploaderFactory = $uploaderFactory;
+          $this->varDirectory = $filesystem->getDirectoryWrite(DirectoryList::VAR_DIR);
           $this->token = $token;
           $this->customerRepository = $customerRepository;
           $this->httpContext = $httpContext;
@@ -112,11 +140,65 @@ class Custom
 
             $response = ['success' => true, 'message' => 'kati ' . $this->make_greeklish($value)];
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $response = ['success' => false, 'message' => $e->getMessage()];
         }
         return json_encode($response);
     }
+
+    /**
+     * @param array $fileInfo
+     *
+     * @throws ValidatorException
+     */
+    private function validateFile(array $fileInfo)
+    {
+        if (!$fileInfo) {
+            throw new ValidatorException(__('File info is not set'));
+        }
+        if (!is_array($fileInfo)) {
+            throw new ValidatorException(__('File data should be an array'));
+        }
+        if (isset($fileInfo['error']) && $fileInfo['error']) {
+            throw new ValidatorException(__('Unknown error'));
+        }
+        if (!isset($fileInfo['name'])) {
+            throw new ValidatorException(__('File name is not set'));
+        }
+        if (!isset($fileInfo['type']) || $fileInfo['type'] !== self::FILE_TYPE) {
+            throw new ValidatorException(__('File type is not valid'));
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function upload(): string
+    {
+        try {
+//            $fileInfo = $this->request->getFiles('filename');
+//            $this->validateFile($fileInfo);
+            $this->saveFile();
+
+            return 'File successfully uploaded';
+        } catch (Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    /**
+     * @return array
+     * @throws Exception
+     */
+    private function saveFile()
+    {
+        $uploader = $this->uploaderFactory->create(['fileId' => 'filename']);
+        $workingDir = $this->varDirectory->getAbsolutePath('book_titles/');
+
+        return $uploader->save($workingDir);
+    }
+
+
 
       /**
        * @inheritdoc
@@ -156,7 +238,7 @@ class Custom
 
 
               $response = ['success' => true, 'message' => 'h command exei output: '.  '  ' . $this->make_greeklish($value)];
-          } catch (\Exception $e) {
+          } catch (Exception $e) {
                   $response = ['success' => false, 'message' => $e->getMessage()];
         //                  $this->logger->info($e->getMessage());
           }
@@ -206,7 +288,7 @@ class Custom
                 $product->save();
 
                 $response = ['success' => true, 'message' => 'A book with sku '. $this->make_greeklish( str_replace(' ', '-', $title) ) . ' created successfully'];
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $response = ['success' => false, 'message' => $e->getMessage()];
                 $this->logger->info($e->getMessage());
             }
