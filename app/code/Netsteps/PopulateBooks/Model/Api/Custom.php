@@ -121,7 +121,7 @@ class Custom
         // opou tha eixe thn timh isbn.
         // An den iphrxe tote tha shmainei oti to search einai sto name
 
-        $response = ['success' => false];
+//        $response = ['success' => true];
         try {
 
             $curl = $this->curlFactory->create();
@@ -133,10 +133,10 @@ class Custom
             // output of curl request
             $result = json_decode($curl->getBody(), true);
 
-            $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
-            $logger = new Zend_Log();
-            $logger->addWriter($writer);
-            $logger->log( print_r($result, 1),1);
+//            $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
+//            $logger = new Zend_Log();
+//            $logger->addWriter($writer);
+//            $logger->log( print_r($result, 1),1);
 
             $response = ['success' => true, 'message' => 'kati ' . $this->make_greeklish($value)];
 
@@ -178,7 +178,16 @@ class Custom
         try {
 //            $fileInfo = $this->request->getFiles('filename');
 //            $this->validateFile($fileInfo);
-            $this->saveFile();
+
+            $fileInfo = $this->saveFile();
+
+            // mofify filename to .txt extension for reading it
+            $filename = $fileInfo['filename'];
+            $filenameWithoutExt = explode('.'.$fileInfo['extension'], $fileInfo['filename'])[0];
+            $txtFilename = $filenameWithoutExt.'.txt';
+
+//            $this->makeTxtFromImageFile($filename, $filenameWithoutExt);
+//            $this->readContentOfTxtFile($txtFilename);
 
             return 'File successfully uploaded';
         } catch (Exception $exception) {
@@ -195,7 +204,48 @@ class Custom
         $uploader = $this->uploaderFactory->create(['fileId' => 'filename']);
         $workingDir = $this->varDirectory->getAbsolutePath('book_titles/');
 
-        return $uploader->save($workingDir);
+        $uploader->save($workingDir);
+
+        return ['filename' => $uploader->getUploadedFileName(), 'extension' => $uploader->getFileExtension()];
+    }
+
+    /**
+     * @param $filename
+     * @param $filenameWithoutExtens
+     * @return string|null
+     */
+    public function makeTxtFromImageFile($filename, $filenameWithoutExtens): ?string
+    {
+        // to path poy vlepei einai <magento_dir>/pub
+        $content=null;
+        $retval=null;
+        exec('tesseract -l ell ../var/book_titles/'.$filename  .' ../var/book_titles/'.$filenameWithoutExtens ,
+            $content,
+            $retval
+        );
+        echo "Returned with status $retval and output:\n";
+
+        return "{ vag: 'vag' }";
+
+    }
+
+
+    /**
+     * @param $filename
+     * @return string|null
+     */
+    public function readContentOfTxtFile($filename): ?string
+    {
+        // to path poy vlepei einai <magento_dir>/pub
+        $content=null;
+        $retval=null;
+        exec('cat ../var/book_titles/'.$filename, $content, $retval);
+        echo "Returned with status $retval and output:\n";
+        $title = rtrim( join(" ", $content) );
+
+        echo $title."\n";
+        return $title;
+
     }
 
 
@@ -211,7 +261,7 @@ class Custom
           // opou tha eixe thn timh isbn.
           // An den iphrxe tote tha shmainei oti to search einai sto name
 
-          $response = ['success' => false];
+//          return $response = ['success' => true];
           try {
               // Edw prepei na prosexoume na exoume mono enan index poy na xekinaei me "magento"
               // sthn elasticsearch upodomh
@@ -228,14 +278,6 @@ class Custom
                   ]
               ];
               $results = $client->search($params);
-
-              // to path poy vlepei einai <magento_dir>/pub
-              $title=null;
-              $retval=null;
-              exec('cat /home/kantro/efsyn.txt', $title, $retval);
-              echo "Returned with status $retval and output:\n";
-              echo print_r($title);
-
 
               $response = ['success' => true, 'message' => 'h command exei output: '.  '  ' . $this->make_greeklish($value)];
           } catch (Exception $e) {

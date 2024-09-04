@@ -22,7 +22,7 @@ interface CustomInterface
     public function searchBookInBiblionet($value);
 
     /**
-     * Upload Pdf
+     * Upload Image File
      *
      * @return string
      * @api
