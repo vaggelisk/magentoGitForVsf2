@@ -48,7 +48,7 @@ class Custom
         "order" => "td",
     );
 
-    public const FILE_TYPE = 'application/pdf';
+    public const FILE_TYPE = 'application/jpeg';
 
     /** @var Http */
     private $request;
@@ -165,9 +165,9 @@ class Custom
         if (!isset($fileInfo['name'])) {
             throw new ValidatorException(__('File name is not set'));
         }
-        if (!isset($fileInfo['type']) || $fileInfo['type'] !== self::FILE_TYPE) {
-            throw new ValidatorException(__('File type is not valid'));
-        }
+//        if (!isset($fileInfo['type']) || $fileInfo['type'] !== self::FILE_TYPE) {
+//            throw new ValidatorException(__('File type is not valid'));
+//        }
     }
 
     /**
