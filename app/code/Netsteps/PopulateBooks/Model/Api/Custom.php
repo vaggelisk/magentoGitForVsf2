@@ -208,9 +208,11 @@ class Custom
             $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
             $logger = new Zend_Log();
             $logger->addWriter($writer);
-            $logger->log( print_r("mpainei edw", 1),1);
+            $logger->log( print_r("mpainei edw saveFile", 1),1);
         $uploader = $this->uploaderFactory->create(['fileId' => 'filename']);
         $workingDir = $this->varDirectory->getAbsolutePath('book_titles/');
+
+        $logger->log( print_r("mpainei edw saveFile", 1),1);
 
         $uploader->save($workingDir);
 
