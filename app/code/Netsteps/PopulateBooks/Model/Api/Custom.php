@@ -157,7 +157,7 @@ class Custom
             throw new ValidatorException(__('File info is not set'));
         }
         if (!is_array($fileInfo)) {
-                        $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
+            $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
             $logger = new Zend_Log();
             $logger->addWriter($writer);
             $logger->log( print_r("mpainei edw", 1),1);
@@ -205,6 +205,10 @@ class Custom
      */
     private function saveFile()
     {
+            $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
+            $logger = new Zend_Log();
+            $logger->addWriter($writer);
+            $logger->log( print_r("mpainei edw", 1),1);
         $uploader = $this->uploaderFactory->create(['fileId' => 'filename']);
         $workingDir = $this->varDirectory->getAbsolutePath('book_titles/');
 
