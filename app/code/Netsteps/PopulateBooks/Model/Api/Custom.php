@@ -176,8 +176,8 @@ class Custom
     public function upload(): string
     {
         try {
-//            $fileInfo = $this->request->getFiles('filename');
-//            $this->validateFile($fileInfo);
+            $fileInfo = $this->request->getFiles('filename');
+            $this->validateFile($fileInfo);
 
             $fileInfo = $this->saveFile();
 
@@ -186,8 +186,8 @@ class Custom
             $filenameWithoutExt = explode('.'.$fileInfo['extension'], $fileInfo['filename'])[0];
             $txtFilename = $filenameWithoutExt.'.txt';
 
-//            $this->makeTxtFromImageFile($filename, $filenameWithoutExt);
-//            $this->readContentOfTxtFile($txtFilename);
+            $this->makeTxtFromImageFile($filename, $filenameWithoutExt);
+            $this->readContentOfTxtFile($txtFilename);
 
             return 'File successfully uploaded';
         } catch (Exception $exception) {
