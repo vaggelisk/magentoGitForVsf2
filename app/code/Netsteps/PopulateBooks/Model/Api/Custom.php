@@ -157,6 +157,10 @@ class Custom
             throw new ValidatorException(__('File info is not set'));
         }
         if (!is_array($fileInfo)) {
+                        $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
+            $logger = new Zend_Log();
+            $logger->addWriter($writer);
+            $logger->log( print_r("mpainei edw", 1),1);
             throw new ValidatorException(__('File data should be an array'));
         }
         if (isset($fileInfo['error']) && $fileInfo['error']) {
