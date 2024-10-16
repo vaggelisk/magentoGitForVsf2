@@ -322,7 +322,7 @@ class Custom
      * @inheritdoc
      */
     public function createBook($customerId, $title)
-    {git stat
+    {
         $customer = $this->customerRepository->getById($customerId);
         $groupId = $customer->getGroupId();
 
