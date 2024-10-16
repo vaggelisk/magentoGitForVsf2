@@ -2,6 +2,7 @@
 
 namespace Netsteps\PopulateBooks\Model\Api;
 
+use _PHPStan_582a9cb8b\Nette\Utils\Json;
 use Divante\VsbridgeIndexerCore\Elasticsearch\ClientBuilder;
 use Exception;
 use Magento\Customer\Api\CustomerRepositoryInterface;
@@ -11,6 +12,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\HTTP\Client\CurlFactory;
 use Magento\Integration\Model\Oauth\Token;
+use phpseclib3\Crypt\EC\Formats\Keys\PKCS8;
 use Psr\Log\LoggerInterface;
 use Zend_Log;
 use Zend_Log_Writer_Stream;
@@ -24,14 +26,19 @@ use Magento\MediaStorage\Model\File\UploaderFactory;
 class Custom
 {
 
-    private const URL = 'https://biblionet.gr/wp-admin/admin-ajax.php';
+    private const URL2 = 'https://biblionet.gr/wp-admin/admin-ajax.php';
+
+    private const URL3 = 'https://7ejq8.wiremockapi.cloud/json';
+
+//    private const URL = 'https://biblionet.gr/webservice/get_month_titles';
+    private const URL = 'https://biblionet.gr/wp-json/biblionetwebservice/get_month_titles';
 
     const CONTEXT_AUTH = 'customer_logged_in';
 
     /**
      * @var array
      */
-    private array $postParams = array(
+    private array $postParams2 = array(
         "action" => "return_detailed_search",
         "contributorkind" => "1",
         "titlekind" => "0",
@@ -48,7 +55,26 @@ class Custom
         "order" => "td",
     );
 
-    public const FILE_TYPE = 'application/jpeg';
+    /**
+     * @var array
+     */
+    private array $postParams = array(
+       "username" => "evangelos.karakaxis@gmail.com",
+       "password" => "testing123",
+       "year" => "2023",
+       "month" => "8",
+       "titles_per_page" => "3"
+    );
+
+    /**
+     * @var array
+     */
+    private array $postParams3 = array(
+        "id"=> 12345,
+         "value"=> "abc-def-ghi"
+    );
+
+    public const FILE_TYPE = ['image/jpeg', 'image/png', 'image/jpg'];
 
     /** @var Http */
     private $request;
@@ -61,7 +87,6 @@ class Custom
 
     /** @var Filesystem\Directory\WriteInterface */
     private $varDirectory;
-
 
 
     /**
@@ -82,6 +107,8 @@ class Custom
      * @var Token
      */
     protected Token $token;
+
+    private ?string $bookTitle;
 
     public function __construct(
         Http $request,
@@ -116,6 +143,7 @@ class Custom
      */
     public function searchBookInBiblionet($value): bool|string
     {
+
         // Edw tha mporouse na ginei kai to search me vash to isbn
         // alla tha apaitouse kai mia 2h proairetikh metavlhth sth synarthsh
         // opou tha eixe thn timh isbn.
@@ -125,18 +153,24 @@ class Custom
         try {
 
             $curl = $this->curlFactory->create();
-            $curl->addHeader("Content-Type", "application/x-www-form-urlencoded");
-            $this->getSearchParams();
+            $curl->addHeader("Content-Type", "application/json");
+            $curl->addHeader("Accept", "*/*");
+//            $this->getSearchParams();
             // post method
-            $curl->post(self::URL, $this->postParams);
+//            $curl->post(self::URL, $this->postParams);
+            $curl->post(self::URL, json_encode($this->postParams) );
 
             // output of curl request
-            $result = json_decode($curl->getBody(), true);
+            $result = $curl->getBody();
+            $result2 = $curl->getStatus();
 
-//            $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
-//            $logger = new Zend_Log();
-//            $logger->addWriter($writer);
-//            $logger->log( print_r($result, 1),1);
+            $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
+            $logger = new Zend_Log();
+            $logger->addWriter($writer);
+//            $logger->log( print_r('baggelis', 1),1);
+            $logger->log( gettype($result) ,1);
+            $logger->log(  $result ,1);
+            $logger->log(  $result2 ,1);
 
             $response = ['success' => true, 'message' => 'kati ' . $this->make_greeklish($value)];
 
@@ -157,10 +191,6 @@ class Custom
             throw new ValidatorException(__('File info is not set'));
         }
         if (!is_array($fileInfo)) {
-            $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
-            $logger = new Zend_Log();
-            $logger->addWriter($writer);
-            $logger->log( print_r("mpainei edw", 1),1);
             throw new ValidatorException(__('File data should be an array'));
         }
         if (isset($fileInfo['error']) && $fileInfo['error']) {
@@ -169,17 +199,18 @@ class Custom
         if (!isset($fileInfo['name'])) {
             throw new ValidatorException(__('File name is not set'));
         }
-//        if (!isset($fileInfo['type']) || $fileInfo['type'] !== self::FILE_TYPE) {
-//            throw new ValidatorException(__('File type is not valid'));
-//        }
+        if (!isset($fileInfo['type']) || !in_array( $fileInfo['type'] , self::FILE_TYPE) ) {
+            throw new ValidatorException(__('File type is not valid'));
+        }
     }
 
     /**
      * @inheritDoc
      */
-    public function upload(): string
+    public function upload(): array
     {
         try {
+
             $fileInfo = $this->request->getFiles('filename');
             $this->validateFile($fileInfo);
 
@@ -191,9 +222,13 @@ class Custom
             $txtFilename = $filenameWithoutExt.'.txt';
 
             $this->makeTxtFromImageFile($filename, $filenameWithoutExt);
-            $this->readContentOfTxtFile($txtFilename);
+            $this->bookTitle = $this->readContentOfTxtFile($txtFilename);
 
-            return 'File successfully uploaded';
+            return array(
+                'status' => 1,
+                'statusDescription' => 'File successfully uploaded',
+                'title' => $this->bookTitle
+            );
         } catch (Exception $exception) {
             return $exception->getMessage();
         }
@@ -205,15 +240,8 @@ class Custom
      */
     private function saveFile()
     {
-            $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
-            $logger = new Zend_Log();
-            $logger->addWriter($writer);
-            $logger->log( print_r("mpainei edw saveFile", 1),1);
         $uploader = $this->uploaderFactory->create(['fileId' => 'filename']);
         $workingDir = $this->varDirectory->getAbsolutePath('book_titles/');
-
-        $logger->log( print_r("mpainei edw saveFile", 1),1);
-
         $uploader->save($workingDir);
 
         return ['filename' => $uploader->getUploadedFileName(), 'extension' => $uploader->getFileExtension()];
@@ -229,14 +257,11 @@ class Custom
         // to path poy vlepei einai <magento_dir>/pub
         $content=null;
         $retval=null;
-        exec('tesseract -l ell ../var/book_titles/'.$filename  .' ../var/book_titles/'.$filenameWithoutExtens ,
+        exec('tesseract -l ell ../var/book_titles/' . $filename . ' ../var/book_titles/' . $filenameWithoutExtens ,
             $content,
             $retval
         );
-        echo "Returned with status $retval and output:\n";
-
         return "{ vag: 'vag' }";
-
     }
 
 
@@ -250,14 +275,8 @@ class Custom
         $content=null;
         $retval=null;
         exec('cat ../var/book_titles/'.$filename, $content, $retval);
-        echo "Returned with status $retval and output:\n";
-        $title = rtrim( join(" ", $content) );
-
-        echo $title."\n";
-        return $title;
-
+        return rtrim( join(" ", $content) );
     }
-
 
 
       /**
@@ -303,7 +322,7 @@ class Custom
      * @inheritdoc
      */
     public function createBook($customerId, $title)
-    {
+    {git stat
         $customer = $this->customerRepository->getById($customerId);
         $groupId = $customer->getGroupId();
 
@@ -317,6 +336,13 @@ class Custom
                 // gia to sku iparxei avth edw h synarthsh poy mporoume na vasistoume
                 // https://gist.github.com/teomaragakis/7580134
                 //
+
+                $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
+                $logger = new Zend_Log();
+                $logger->addWriter($writer);
+                $logger->log( print_r($title, 1),1);
+
+
                 $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // instance of object manager
                 $product = $objectManager->create('\Magento\Catalog\Model\Product');
                 $product->setSku( $this->make_greeklish( str_replace(' ', '-', $title) ) ); // Set your sku here
@@ -334,7 +360,7 @@ class Custom
                         'use_config_manage_stock' => 0,
                         'manage_stock' => 1,
                         'is_in_stock' => 1,
-                        'qty' => 100
+                        'qty' => 1
                     )
                 );
                 $product->save();

@@ -32,11 +32,11 @@ interface CustomInterface
 
     /**
     * GET for Post api
-    * @api
     * @param string $customerId
     * @param string $title
     * @return string
+    *@api
     */
-    public function createBook($customerId, $title);
+    public function createBook(string $customerId, string $title): string;
 
 }
