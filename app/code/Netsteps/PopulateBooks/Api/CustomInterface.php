@@ -33,7 +33,8 @@ interface CustomInterface
     /**
     * GET for Post api
     * @param string $customerId
-    * @param string $Title*
+    * @param string $Title
+    * @param string $Subtitle
     * @param string $Summary
     * @return string
     *@api
@@ -41,6 +42,7 @@ interface CustomInterface
     public function createBook(
         string $customerId,
         string $Title,
+        string $Subtitle,
         string $Summary,
     ): string;
 
