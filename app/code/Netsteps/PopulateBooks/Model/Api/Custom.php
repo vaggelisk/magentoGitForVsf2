@@ -321,7 +321,50 @@ class Custom
     /**
      * @inheritdoc
      */
-    public function createBook($customerId, $Title, $Subtitle, $Summary)
+    public function createBook($customerId,
+                               $Title,
+                               $Subtitle,
+                               $CoverImage,
+                               $ISBN,
+                               $PublisherID,
+                               $Publisher,
+                               $WriterID,
+                               $Writer,
+                               $WriterName,
+                               $FirstPublishDate,
+                               $CurrentPublishDate,
+                               $PlaceID,
+                               $Place,
+                               $EditionNo,
+                               $Cover,
+                               $Dimensions,
+                               $PageNo,
+                               $Availability,
+                               $Price,
+                               $VAT,
+                               $Weight,
+                               $AgeFrom,
+                               $AgeTo,
+                               $Summary,
+                               $LanguageID,
+                               $Language,
+                               $LanguageOriginalID,
+                               $LanguageOriginal,
+                               $LanguageTranslatedFromID,
+                               $LanguageTranslatedFrom,
+                               $Series,
+                               $MultiVolumeTitle,
+                               $VolumeNo,
+                               $VolumeCount,
+                               $Specifications,
+                               $Comments,
+                               $CategoryID,
+                               $Category,
+                               $SubjectsID,
+                               $SubjectTitle,
+                               $SubjectDDC,
+                               $SubjectOrder,
+    ): bool|string
     {
         $customer = $this->customerRepository->getById($customerId);
         $groupId = $customer->getGroupId();
@@ -347,7 +390,6 @@ class Custom
                 $product = $objectManager->create('\Magento\Catalog\Model\Product');
                 $product->setSku( $this->make_greeklish( str_replace(' ', '-', $Title) ) ); // Set your sku here
                 $product->setName($Title); // Name of Product
-                $product->setDescription($Summary);
                 $product->setSubtitle($Subtitle);
                 $product->setAttributeSetId(4); // Attribute set id
                 $product->setStatus(1); // Status on product enabled/ disabled 1/0
@@ -365,6 +407,47 @@ class Custom
                         'qty' => 1
                     )
                 );
+                $product->setCoverimage($CoverImage);
+                $product->setIsbn($ISBN);
+                $product->setPublisherid($PublisherID);
+                $product->setPublisher($Publisher);
+                $product->setWriterid($WriterID);
+                $product->setWriter($Writer);
+                $product->setWritername($WriterName);
+                $product->setFirstpublishdate($FirstPublishDate);
+                $product->setCurrentpublishdate($CurrentPublishDate);
+                $product->setPlaceid($PlaceID);
+                $product->setPlace($Place);
+                $product->setEditionNo($EditionNo);
+                $product->setCover($Cover);
+                $product->setDimensions($Dimensions);
+                $product->setPageno($PageNo);
+//                $product->set($Availability);
+//                $product->set($Price);
+//                $product->set($VAT);
+                $product->setWeight($Weight);
+                $product->setAgefrom($AgeFrom);
+                $product->setAgeto($AgeTo);
+                $product->setSummary($Summary);
+                $product->setLanguageid($LanguageID);
+//                $product->set($Language);
+//                $product->set($LanguageOriginalID);
+//                $product->set($LanguageOriginal);
+//                $product->set($LanguageTranslatedFromID);
+//                $product->set($LanguageTranslatedFrom);
+//                $product->set($Series);
+//                $product->set($MultiVolumeTitle);
+//                $product->set($VolumeNo);
+//                $product->set($VolumeCount);
+//                $product->set($Specifications);
+//                $product->set($Comments);
+                $product->setCategoryid($CategoryID);
+                $product->setCategorybiblionet($Category);
+//                $product->set($SubjectsID);
+//                $product->set($SubjectTitle);
+//                $product->set($SubjectDDC);
+//                $product->set($SubjectOrder);
+
                 $product->save();
 
                 $response = ['success' => true, 'message' => 'A book with sku '. $this->make_greeklish( str_replace(' ', '-', $Title) ) . ' created successfully'];

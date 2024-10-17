@@ -27,7 +27,46 @@
             <parameter name="customerId" force="true">%customer_id%</parameter>
             <parameter name="Title" >%Title%</parameter>
             <parameter name="Subtitle" >%Subtitle%</parameter>
+            <parameter name="CoverImage" >%CoverImage%</parameter>
+            <parameter name="ISBN" >%ISBN%</parameter>
+            <parameter name="PublisherID" >%PublisherID%</parameter>
+            <parameter name="Publisher" >%Publisher%</parameter>
+            <parameter name="WriterID" >%WriterID%</parameter>
+            <parameter name="Writer" >%Writer%</parameter>
+            <parameter name="WriterName" >%WriterName%</parameter>
+            <parameter name="FirstPublishDate" >%FirstPublishDate%</parameter>
+            <parameter name="CurrentPublishDate" >%CurrentPublishDate%</parameter>
+            <parameter name="PlaceID" >%PlaceID%</parameter>
+            <parameter name="Place" >%Place%</parameter>
+            <parameter name="EditionNo" >%EditionNo%</parameter>
+            <parameter name="Cover" >%Cover%</parameter>
+            <parameter name="Dimensions" >%Dimensions%</parameter>
+            <parameter name="PageNo" >%PageNo%</parameter>
+            <parameter name="Availability" >%Availability%</parameter>
+            <parameter name="Price" >%Price%</parameter>
+            <parameter name="VAT" >%VAT%</parameter>
+            <parameter name="Weight" >%Weight%</parameter>
+            <parameter name="AgeFrom" >%AgeFrom%</parameter>
+            <parameter name="AgeTo" >%AgeTo%</parameter>
             <parameter name="Summary" >%Summary%</parameter>
+            <parameter name="LanguageID" >%LanguageID%</parameter>
+            <parameter name="Language" >%Language%</parameter>
+            <parameter name="LanguageOriginalID" >%LanguageOriginalID%</parameter>
+            <parameter name="LanguageOriginal" >%LanguageOriginal%</parameter>
+            <parameter name="LanguageTranslatedFromID" >%LanguageTranslatedFromID%</parameter>
+            <parameter name="LanguageTranslatedFrom" >%LanguageTranslatedFrom%</parameter>
+            <parameter name="Series" >%Series%</parameter>
+            <parameter name="MultiVolumeTitle" >%MultiVolumeTitle%</parameter>
+            <parameter name="VolumeNo" >%VolumeNo%</parameter>
+            <parameter name="VolumeCount" >%VolumeCount%</parameter>
+            <parameter name="Specifications" >%Specifications%</parameter>
+            <parameter name="Comments" >%Comments%</parameter>
+            <parameter name="CategoryID" >%CategoryID%</parameter>
+            <parameter name="Category" >%Category%</parameter>
+            <parameter name="SubjectsID" >%SubjectsID%</parameter>
+            <parameter name="SubjectTitle" >%SubjectTitle%</parameter>
+            <parameter name="SubjectDDC" >%SubjectDDC%</parameter>
+            <parameter name="SubjectOrder" >%SubjectOrder%</parameter>
         </data>
     </route>
 </routes>
