@@ -340,13 +340,13 @@ class Custom
                 $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
                 $logger = new Zend_Log();
                 $logger->addWriter($writer);
-                $logger->log( print_r($title, 1),1);
+                $logger->log( print_r($Title, 1),1);
 
 
                 $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // instance of object manager
                 $product = $objectManager->create('\Magento\Catalog\Model\Product');
-                $product->setSku( $this->make_greeklish( str_replace(' ', '-', $title) ) ); // Set your sku here
-                $product->setName($title); // Name of Product
+                $product->setSku( $this->make_greeklish( str_replace(' ', '-', $Title) ) ); // Set your sku here
+                $product->setName($Title); // Name of Product
                 $product->setAttributeSetId(4); // Attribute set id
                 $product->setStatus(1); // Status on product enabled/ disabled 1/0
                 $product->setWebsiteIds([1]);
@@ -365,7 +365,7 @@ class Custom
                 );
                 $product->save();
 
-                $response = ['success' => true, 'message' => 'A book with sku '. $this->make_greeklish( str_replace(' ', '-', $title) ) . ' created successfully'];
+                $response = ['success' => true, 'message' => 'A book with sku '. $this->make_greeklish( str_replace(' ', '-', $Title) ) . ' created successfully'];
             } catch (Exception $e) {
                 $response = ['success' => false, 'message' => $e->getMessage()];
                 $this->logger->info($e->getMessage());
