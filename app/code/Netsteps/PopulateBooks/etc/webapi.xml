@@ -25,7 +25,7 @@
         </resources>
         <data>
             <parameter name="customerId" force="true">%customer_id%</parameter>
-            <parameter name="title" >%title%</parameter>
+            <parameter name="title" >%Title%</parameter>
         </data>
     </route>
 </routes>
