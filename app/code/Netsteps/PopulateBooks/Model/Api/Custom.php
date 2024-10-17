@@ -321,7 +321,7 @@ class Custom
     /**
      * @inheritdoc
      */
-    public function createBook($customerId, $Title)
+    public function createBook($customerId, $Title, $Summary)
     {
         $customer = $this->customerRepository->getById($customerId);
         $groupId = $customer->getGroupId();
