@@ -2,8 +2,6 @@
 
 namespace Netsteps\PopulateBooks\Api;
 
-use Magento\Tests\NamingConvention\true\string;
-
 interface CustomInterface
 {
     /**

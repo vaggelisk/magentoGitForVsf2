@@ -364,7 +364,7 @@ class Custom
                                $SubjectTitle,
                                $SubjectDDC,
                                $SubjectOrder,
-    ): bool|string
+    ): string
     {
         $customer = $this->customerRepository->getById($customerId);
         $groupId = $customer->getGroupId();
