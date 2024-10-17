@@ -347,7 +347,7 @@ class Custom
                 $product = $objectManager->create('\Magento\Catalog\Model\Product');
                 $product->setSku( $this->make_greeklish( str_replace(' ', '-', $Title) ) ); // Set your sku here
                 $product->setName($Title); // Name of Product
-                $product->setDiscription($Summary);
+                $product->setDescription($Summary);
                 $product->setSubtitle($Subtitle);
                 $product->setAttributeSetId(4); // Attribute set id
                 $product->setStatus(1); // Status on product enabled/ disabled 1/0
