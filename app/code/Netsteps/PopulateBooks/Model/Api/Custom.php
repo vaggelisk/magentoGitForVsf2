@@ -427,7 +427,7 @@ class Custom
                 $product->setAgefrom($AgeFrom);
                 $product->setAgeto($AgeTo);
                 $product->setDescription($Summary);
-                $product->setShort_description($Summary(0, 45));
+                $product->setShort_description( substr( $Summary, 0, 35));
                 $product->setLanguageid($LanguageID);
 //                $product->set($Language);
 //                $product->set($LanguageOriginalID);
