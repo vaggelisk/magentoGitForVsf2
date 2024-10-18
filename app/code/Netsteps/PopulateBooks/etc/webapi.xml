@@ -60,7 +60,6 @@
             <parameter name="VolumeNo" >%VolumeNo%</parameter>
             <parameter name="VolumeCount" >%VolumeCount%</parameter>
             <parameter name="Specifications" >%Specifications%</parameter>
-            <parameter name="Comments" >%Comments%</parameter>
             <parameter name="CategoryID" >%CategoryID%</parameter>
             <parameter name="Category" >%Category%</parameter>
             <parameter name="SubjectsID" >%SubjectsID%</parameter>
