@@ -357,7 +357,6 @@ class Custom
                                $VolumeNo,
                                $VolumeCount,
                                $Specifications,
-                               $Comments,
                                $CategoryID,
                                $Category,
                                $SubjectsID,
@@ -439,10 +438,9 @@ class Custom
 //                $product->set($VolumeNo);
 //                $product->set($VolumeCount);
 //                $product->set($Specifications);
-//                $product->set($Comments);
                 $product->setCategoryid($CategoryID);
                 $product->setCategorybiblionet($Category);
-                $product->setSubjectsId($SubjectsID);
+                $product->setSubjectsid($SubjectsID);
                 $product->setSubjecttitle($SubjectTitle);
                 $product->setSubjectddc($SubjectDDC);
                 $product->setSubjectorder($SubjectOrder);

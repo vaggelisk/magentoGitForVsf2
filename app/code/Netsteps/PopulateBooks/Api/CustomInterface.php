@@ -68,7 +68,6 @@ interface CustomInterface
      * @param string $VolumeNo
      * @param string $VolumeCount
      * @param string $Specifications
-     * @param string $Comments
      * @param string $CategoryID
      * @param string $Category
      * @param string $SubjectsID
@@ -115,7 +114,6 @@ interface CustomInterface
         string $VolumeNo,
         string $VolumeCount,
         string $Specifications,
-        string $Comments,
         string $CategoryID,
         string $Category,
         string $SubjectsID,
