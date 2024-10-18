@@ -394,7 +394,7 @@ class Custom
                 $product->setStatus(1); // Status on product enabled/ disabled 1/0
                 $product->setWebsiteIds([1]);
                 $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
-                $product->setTaxClassId(0); // Tax class id
+                $product->setTaxClassId(1); // Tax class id
                 $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
                 $product->setStockData(
                     array(
@@ -419,7 +419,7 @@ class Custom
                 $product->setCover($Cover);
                 $product->setDimensions($Dimensions);
                 $product->setPageno($PageNo);
-//                $product->set($Availability);
+                $product->setAvailabilityBiblionet($Availability);
                 $product->setPrice($Price);
 //                $product->set($VAT);
                 $product->setWeight($Weight);
@@ -433,11 +433,11 @@ class Custom
                 $product->setLanguageoriginal($LanguageOriginal);
                 $product->setLanguagetranslatedfromid($LanguageTranslatedFromID);
                 $product->setLanguagetranslatedfrom($LanguageTranslatedFrom);
-//                $product->set($Series);
-//                $product->set($MultiVolumeTitle);
-//                $product->set($VolumeNo);
-//                $product->set($VolumeCount);
-//                $product->set($Specifications);
+                $product->setSeriesbiblionet($Series);
+                $product->setMultivolumetitle($MultiVolumeTitle);
+                $product->setVolumeno($VolumeNo);
+                $product->setVolumecount($VolumeCount);
+                $product->setSpecification($Specifications);
                 $product->setCategoryid($CategoryID);
                 $product->setCategorybiblionet($Category);
                 $product->setSubjectsid($SubjectsID);
