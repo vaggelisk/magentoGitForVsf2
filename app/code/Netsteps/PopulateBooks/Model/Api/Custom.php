@@ -394,11 +394,9 @@ class Custom
                 $product->setAttributeSetId(4); // Attribute set id
                 $product->setStatus(1); // Status on product enabled/ disabled 1/0
                 $product->setWebsiteIds([1]);
-                $product->setWeight(10); // weight of product
                 $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
                 $product->setTaxClassId(0); // Tax class id
                 $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
-                $product->setPrice(80); // price of product
                 $product->setStockData(
                     array(
                         'use_config_manage_stock' => 0,
@@ -423,12 +421,13 @@ class Custom
                 $product->setDimensions($Dimensions);
                 $product->setPageno($PageNo);
 //                $product->set($Availability);
-//                $product->set($Price);
+                $product->setPrice($Price);
 //                $product->set($VAT);
                 $product->setWeight($Weight);
                 $product->setAgefrom($AgeFrom);
                 $product->setAgeto($AgeTo);
-                $product->setSummary($Summary);
+                $product->setDescription($Summary);
+                $product->setShort_description($Summary(0, 45));
                 $product->setLanguageid($LanguageID);
 //                $product->set($Language);
 //                $product->set($LanguageOriginalID);
@@ -443,10 +442,10 @@ class Custom
 //                $product->set($Comments);
                 $product->setCategoryid($CategoryID);
                 $product->setCategorybiblionet($Category);
-//                $product->set($SubjectsID);
-//                $product->set($SubjectTitle);
-//                $product->set($SubjectDDC);
-//                $product->set($SubjectOrder);
+                $product->setSubjectsId($SubjectsID);
+                $product->setSubjecttitle($SubjectTitle);
+                $product->setSubjectddc($SubjectDDC);
+                $product->setSubjectorder($SubjectOrder);
 
                 $product->save();
 
