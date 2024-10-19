@@ -36,6 +36,6 @@ class AddCustomAttribute implements ResolverInterface
     ) {
         $product = $value['model'];
         $_product = $this->productFactory->create()->load($product->getId());
-        return $_product->getData('sample_attribute');
+        return $_product->getData('isbn');
     }
 }
