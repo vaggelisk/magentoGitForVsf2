@@ -1,0 +1,14 @@
+interface ProductInterface {
+    sample_attribute: String @doc(description: "Product Custom Attribute Show")
+      @resolver(
+        class: "Netsteps\\PopulateBooks\\Model\\Resolver\\Product\\AddCustomAttribute"
+      )
+}
+
+input ProductAttributeFilterInput {
+  sample_attribute: FilterEqualTypeInput @doc(description: "Product Data filter with Custom Attribute Value")
+}
+
+input ProductAttributeSortInput {
+  sample_attribute: SortEnum @doc(description: "Sort by the Product Custom Attribute.")
+}
