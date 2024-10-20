@@ -301,7 +301,7 @@ class Custom
                   'body'  => [
                       'query' => [
                           'match' => [
-                              'name' => $value
+                              'isbn' => $value
                           ]
                       ]
                   ]
