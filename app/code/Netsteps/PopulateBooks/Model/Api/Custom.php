@@ -296,14 +296,28 @@ class Custom
               // sthn elasticsearch upodomh
               $client = (new ClientBuilder)->build();
               $indices = $client->cat()->indices(array('index' => 'magento*'));
+//              $params = [
+//                  'index' => $indices[0]['index'],
+//                  'body'  => [
+//                      'query' => [
+//                          'match' => [
+//                              'isbn' => $value,
+//                              'operator'=> 'and',
+//                              'zero_terms_query'=> 'all'
+//                          ]
+//                      ]
+//                  ]
+//              ];
               $params = [
                   'index' => $indices[0]['index'],
                   'body'  => [
                       'query' => [
-                          'match' => [
-                              'isbn' => $value,
-                              'operator'=> 'and',
-                              'zero_terms_query'=> 'all'
+                          'constant_score' => [
+                              'filter' => [
+                                  'term' => [
+                                      'isbn' => $value
+                                  ]
+                              ]
                           ]
                       ]
                   ]
