@@ -301,7 +301,9 @@ class Custom
                   'body'  => [
                       'query' => [
                           'match' => [
-                              'isbn' => $value
+                              'isbn' => $value,
+                              'operator'=> 'and',
+                              'zero_terms_query'=> 'all'
                           ]
                       ]
                   ]
