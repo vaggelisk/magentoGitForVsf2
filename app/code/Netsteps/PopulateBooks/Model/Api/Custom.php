@@ -313,7 +313,8 @@ class Custom
                   $response = ['success' => false, 'message' => $e->getMessage()];
         //                  $this->logger->info($e->getMessage());
           }
-          return json_encode($response);
+//          return json_encode($response);
+          return $response;
     }
 
 
