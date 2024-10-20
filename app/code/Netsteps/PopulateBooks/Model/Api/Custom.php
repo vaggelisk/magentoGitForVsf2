@@ -315,7 +315,7 @@ class Custom
                           'constant_score' => [
                               'filter' => [
                                   'term' => [
-                                      'sku' => $value
+                                      'name' => $value
                                   ]
                               ]
                           ]
