@@ -308,7 +308,7 @@ class Custom
               ];
               $results = $client->search($params);
 
-              $response = ['success' => true, 'message' => 'h command exei output: '.  '  ' . $this->make_greeklish($value)];
+              $response = ['success' => true, 'data' => $results];
           } catch (Exception $e) {
                   $response = ['success' => false, 'message' => $e->getMessage()];
         //                  $this->logger->info($e->getMessage());
