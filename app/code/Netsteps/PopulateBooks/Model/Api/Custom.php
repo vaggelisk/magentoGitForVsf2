@@ -294,6 +294,8 @@ class Custom
           try {
               // Edw prepei na prosexoume na exoume mono enan index poy na xekinaei me "magento"
               // sthn elasticsearch upodomh
+
+              $valueInGreeklish =  str_replace(' ', '-', strtolower( $this->make_greeklish($value)));
               $client = (new ClientBuilder)->build();
               $indices = $client->cat()->indices(array('index' => 'magento*'));
 //              $params = [
@@ -315,7 +317,7 @@ class Custom
                           'constant_score' => [
                               'filter' => [
                                   'term' => [
-                                      'name' => $value
+                                      'sku' => $valueInGreeklish
                                   ]
                               ]
                           ]
@@ -504,7 +506,7 @@ class Custom
             '/[θΘ]/u' => 'th',
             '/[χΧ]/u' => 'ch',
             '/[ψΨ]/u' => 'ps',
-            '/[αά]/u' => 'a',
+            '/[αάΆΑ]/u' => 'a',
             '/[βΒ]/u' => 'v',
             '/[γΓ]/u' => 'g',
             '/[δΔ]/u' => 'd',
