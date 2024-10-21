@@ -282,7 +282,7 @@ class Custom
       /**
        * @inheritdoc
        */
-      public function searchBookInOurLibrary($value)
+      public function searchBookInOurLibrary($title)
       {
           // TODO
           // Edw tha mporouse na ginei kai to search me vash to isbn
@@ -295,21 +295,9 @@ class Custom
               // Edw prepei na prosexoume na exoume mono enan index poy na xekinaei me "magento"
               // sthn elasticsearch upodomh
 
-              $valueInGreeklish =  str_replace(' ', '-', strtolower( $this->make_greeklish($value)));
+              $valueInGreeklish =  str_replace(' ', '-', strtolower( $this->make_greeklish($title)));
               $client = (new ClientBuilder)->build();
               $indices = $client->cat()->indices(array('index' => 'magento*'));
-//              $params = [
-//                  'index' => $indices[0]['index'],
-//                  'body'  => [
-//                      'query' => [
-//                          'match' => [
-//                              'isbn' => $value,
-//                              'operator'=> 'and',
-//                              'zero_terms_query'=> 'all'
-//                          ]
-//                      ]
-//                  ]
-//              ];
               $params = [
                   'index' => $indices[0]['index'],
                   'body'  => [
@@ -326,7 +314,7 @@ class Custom
               ];
               $results = $client->search($params);
 
-              $response = ['success' => true, 'data' => $results];
+              $response =  $results['hits']['hits'] ?  [$results['hits']['hits'][0]['_source']] : $results['hits']['hits'];
           } catch (Exception $e) {
                   $response = ['success' => false, 'message' => $e->getMessage()];
         //                  $this->logger->info($e->getMessage());

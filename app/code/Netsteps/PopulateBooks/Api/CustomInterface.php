@@ -7,10 +7,10 @@ interface CustomInterface
     /**
     * POST for Post api
     * @api
-    * @param string $value
+    * @param string $title
     * @return string
     */
-    public function searchBookInOurLibrary($value);
+    public function searchBookInOurLibrary($title);
 
 
     /**
