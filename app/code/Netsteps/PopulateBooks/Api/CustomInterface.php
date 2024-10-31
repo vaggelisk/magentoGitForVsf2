@@ -8,9 +8,10 @@ interface CustomInterface
     * POST for Post api
     * @api
     * @param string $title
+    * @param string $publisher
     * @return string
     */
-    public function searchBookInOurLibrary($title);
+    public function searchBookInOurLibrary(string $title, string $publisher): string;
 
 
     /**

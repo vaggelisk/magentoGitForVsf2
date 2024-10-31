@@ -7,6 +7,7 @@
         </resources>
         <data>
             <parameter name="title" >%title%</parameter>
+            <parameter name="publisher" >%publisher%</parameter>
         </data>
     </route>
     <route method="POST" url="/V1/custom/search-outside/:value">

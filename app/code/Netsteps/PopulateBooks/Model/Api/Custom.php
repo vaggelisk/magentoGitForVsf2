@@ -282,7 +282,7 @@ class Custom
       /**
        * @inheritdoc
        */
-      public function searchBookInOurLibrary($title)
+      public function searchBookInOurLibrary($title, $publisher)
       {
           // TODO
           // Edw tha mporouse na ginei kai to search me vash to isbn
@@ -302,16 +302,35 @@ class Custom
                   'index' => $indices[0]['index'],
                   'body'  => [
                       'query' => [
-                          'constant_score' => [
-                              'filter' => [
-                                  'term' => [
-                                      'sku' => $valueInGreeklish
+                          'bool' => [
+                              'filter' => Array(
+                                  [
+                                      'term' => [
+                                          //    'sku' => $valueInGreeklish  // avto einai to swsto
+                                          'name.keyword' => $title
+                                      ]
+                                  ],
+                                  [
+                                      'term' => [
+                                          //    'sku' => $valueInGreeklish  // avto einai to swsto
+                                          'publisher.keyword' => $publisher
+                                      ]
                                   ]
-                              ]
+                              )
                           ]
                       ]
                   ]
               ];
+//              $params = [
+//                  'index' => $indices[0]['index'],
+//                  'body'  => [
+//                      'query' => [
+//                          'match' => [
+//                              'name' =>  $title
+//                          ]
+//                      ]
+//                  ]
+//              ];
               $results = $client->search($params);
 
               $response =  $results['hits']['hits'] ?  [$results['hits']['hits'][0]['_source']] : $results['hits']['hits'];
