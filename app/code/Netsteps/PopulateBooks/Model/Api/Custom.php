@@ -409,13 +409,21 @@ class Custom
                 $logger = new Zend_Log();
                 $logger->addWriter($writer);
                 $logger->log( print_r($Title, 1),1);
+                $logger->log( print_r($PublisherID, 1),1);
 
 
                 $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // instance of object manager
                 $product = $objectManager->create('\Magento\Catalog\Model\Product');
                 $product->setSku(
-                    $this->make_greeklish( str_replace(' ', '-', $Title) ) . '-' .
-                    ($PublisherID!=='') ? $this->make_greeklish( str_replace(' ', '-', $PublisherID)) : '1' ); // Set your sku here
+                    ($Publisher!=='') ?
+                        $this->make_greeklish( str_replace(' ', '-', $Title.'-'.$Publisher) ) :
+                        $this->make_greeklish( str_replace(' ', '-', $Title) )
+                ); // Set your sku here
+                $product->setUrlKey(
+                    ($Publisher!=='') ?
+                        $this->make_greeklish( str_replace(' ', '-', $Title.'-'.$Publisher) ) :
+                        $this->make_greeklish( str_replace(' ', '-', $Title) )
+                );
                 $product->setName($Title); // Name of Product
                 $product->setSubtitle($Subtitle);
                 $product->setAttributeSetId(4); // Attribute set id
