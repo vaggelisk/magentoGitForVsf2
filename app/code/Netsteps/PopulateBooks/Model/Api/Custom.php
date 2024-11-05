@@ -405,11 +405,11 @@ class Custom
                 // https://gist.github.com/teomaragakis/7580134
                 //
 
-                $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
-                $logger = new Zend_Log();
-                $logger->addWriter($writer);
-                $logger->log( print_r($Title, 1),1);
-                $logger->log( print_r($PublisherID, 1),1);
+//                $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
+//                $logger = new Zend_Log();
+//                $logger->addWriter($writer);
+//                $logger->log( print_r($Title, 1),1);
+//                $logger->log( print_r($PublisherID, 1),1);
 
 
                 $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // instance of object manager
