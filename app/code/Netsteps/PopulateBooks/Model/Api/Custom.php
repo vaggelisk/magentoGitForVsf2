@@ -415,7 +415,7 @@ class Custom
                 $product = $objectManager->create('\Magento\Catalog\Model\Product');
                 $product->setSku(
                     $this->make_greeklish( str_replace(' ', '-', $Title) ) . '-' .
-                    $this->make_greeklish( str_replace(' ', '-', $PublisherID) ) ); // Set your sku here
+                    ($PublisherID!=='') ? $this->make_greeklish( str_replace(' ', '-', $PublisherID)) : '1' ); // Set your sku here
                 $product->setName($Title); // Name of Product
                 $product->setSubtitle($Subtitle);
                 $product->setAttributeSetId(4); // Attribute set id
