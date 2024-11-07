@@ -456,7 +456,7 @@ class Custom
                         'qty' => 1
                     )
                 );
-                $product->setPublisher($Publisher!=='%ublisher%' ? $Publisher : '');
+                $product->setPublisher($Publisher!=='%Publisher%' ? $Publisher : '');
                 $product->setCoverimage($CoverImage!=='%CoverImage%' ? $CoverImage : '');
                 $product->setIsbn($ISBN!=='%ISBN%' ? $ISBN : '');
                 $product->setPublisherid($PublisherID!=='%PublisherID%' ? $PublisherID : '');
