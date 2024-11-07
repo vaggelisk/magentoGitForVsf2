@@ -438,7 +438,7 @@ class Custom
                         $this->make_greeklish(str_replace(' ', '-', $Title))
                 );
                 $product->setName($Title!=='' ? $Title : 'vaggelis');           // Name of Product
-                $product->setSubtitle($Subtitle!=='' ? $Subtitle : '');
+                $product->setSubtitle($Subtitle ?: '');
                 $product->setAttributeSetId(4); // Attribute set id
                 $product->setStatus(1); // Status on product enabled/ disabled 1/0
                 $product->setWebsiteIds([1]);
