@@ -418,27 +418,30 @@ class Custom
                 // https://gist.github.com/teomaragakis/7580134
                 //
 
-//                $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
-//                $logger = new Zend_Log();
-//                $logger->addWriter($writer);
-//                $logger->log( print_r($Title, 1),1);
+                $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
+                $logger = new Zend_Log();
+                $logger->addWriter($writer);
+                $logger->log( print_r( gettype($Publisher), 1),1);
+                $logger->log( print_r( $Publisher, 1),1);
+                $logger->log( print_r( gettype($Subtitle), 1),1);
+                $logger->log( print_r($Subtitle, 1),1);
 //                $logger->log( print_r($PublisherID, 1),1);
 
 
                 $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // instance of object manager
                 $product = $objectManager->create('\Magento\Catalog\Model\Product');
                 $product->setSku(
-                    ($Publisher !== '') ?
+                    ($Publisher !== '%Publisher%') ?
                         $this->make_greeklish(str_replace(' ', '-', $Title . '-' . $Publisher)) :
                         $this->make_greeklish(str_replace(' ', '-', $Title))
                 ); // Set your sku here
                 $product->setUrlKey(
-                    ($Publisher !== '') ?
+                    ($Publisher !== '%Publisher%') ?
                         $this->make_greeklish(str_replace(' ', '-', $Title . '-' . $Publisher)) :
                         $this->make_greeklish(str_replace(' ', '-', $Title))
                 );
                 $product->setName($Title!=='' ? $Title : 'vaggelis');           // Name of Product
-                $product->setSubtitle($Subtitle ?: '');
+                $product->setSubtitle($Subtitle!=='%Subtitle%' ? $Subtitle : '');
                 $product->setAttributeSetId(4); // Attribute set id
                 $product->setStatus(1); // Status on product enabled/ disabled 1/0
                 $product->setWebsiteIds([1]);
@@ -453,44 +456,44 @@ class Custom
                         'qty' => 1
                     )
                 );
-//                ($CoverImage!=='') ?? $product->setCoverimage($CoverImage);
-//                ($ISBN!=='') ?? $product->setIsbn($ISBN);
-//                ($PublisherID!=='') ?? $product->setPublisherid($PublisherID);
-//                ($Publisher!=='') ?? $product->setPublisher($Publisher);
-//                ($WriterID!=='') ?? $product->setWriterid($WriterID);
-//                ($Writer!=='') ?? $product->setWriter($Writer);
-//                ($WriterName!=='') ?? $product->setWritername($WriterName);
-//                ($FirstPublishDate!=='') ?? $product->setFirstpublishdate($FirstPublishDate);
-//                ($CurrentPublishDate!=='') ?? $product->setCurrentpublishdate($CurrentPublishDate);
-//                ($PlaceID!=='') ?? $product->setPlaceid($PlaceID);
-//                ($Place!=='') ?? $product->setPlace($Place);
-//                ($EditionNo!=='') ?? $product->setEditionNo($EditionNo);
-//                ($Cover!=='') ?? $product->setCover($Cover);
-//                ($Dimensions!=='') ?? $product->setDimensions($Dimensions);
-//                ($PageNo!=='') ?? $product->setPageno($PageNo);
-//                ($Availability!=='') ?? $product->setAvailabilityBiblionet($Availability);
-//                ($Price!=='') ?? $product->setPrice($Price);
-//                ($Weight!=='') ?? $product->setWeight($Weight);
-//                ($AgeFrom!=='') ?? $product->setAgefrom($AgeFrom);
-//                ($AgeTo!=='') ?? $product->setAgeto($AgeTo);
-//                ($Summary!=='') ?? $product->setDescription($Summary);
-//                ($LanguageID!=='') ?? $product->setLanguageid($LanguageID);
-//                ($Language!=='') ?? $product->setLanguage($Language);
-//                ($LanguageOriginalID!=='') ?? $product->setLanguageoriginalid($LanguageOriginalID);
-//                ($LanguageOriginal!=='') ?? $product->setLanguageoriginal($LanguageOriginal);
-//                ($LanguageTranslatedFromID!=='') ?? $product->setLanguagetranslatedfromid($LanguageTranslatedFromID);
-//                ($LanguageTranslatedFrom!=='') ?? $product->setLanguagetranslatedfrom($LanguageTranslatedFrom);
-//                ($Series!=='') ?? $product->setSeriesbiblionet($Series);
-//                ($MultiVolumeTitle!=='') ?? $product->setMultivolumetitle($MultiVolumeTitle);
-//                ($VolumeNo!=='') ?? $product->setVolumeno($VolumeNo);
-//                ($VolumeCount!=='') ?? $product->setVolumecount($VolumeCount);
-//                ($Specifications!=='') ?? $product->setSpecification($Specifications);
-//                ($CategoryID!=='') ?? $product->setCategoryid($CategoryID);
-//                ($Category!=='') ?? $product->setCategorybiblionet($Category);
-//                ($SubjectsID!=='') ?? $product->setSubjectsid($SubjectsID);
-//                ($SubjectTitle!=='') ?? $product->setSubjecttitle($SubjectTitle);
-//                ($SubjectDDC!=='') ?? $product->setSubjectddc($SubjectDDC);
-//                ($SubjectOrder!=='') ?? $product->setSubjectorder($SubjectOrder);
+                $product->setPublisher($Publisher!=='%Publisher%' ? $Publisher : '');
+                $product->setCoverimage($CoverImage!=='%$CoverImage%' ? $CoverImage : '');
+                $product->setIsbn($ISBN!=='%$ISBN%' ? $ISBN : '');
+                $product->setPublisherid($PublisherID!=='%$PublisherID%' ? $PublisherID : '');
+                $product->setWriterid($WriterID!=='%$WriterID%' ? $WriterID : '');
+                $product->setWriter($Writer!=='%$Writer%' ? $Writer : '');
+                $product->setWritername($WriterName!=='%$WriterName%' ? $WriterName : '');
+                $product->setFirstpublishdate($FirstPublishDate!=='%$FirstPublishDate%' ? $FirstPublishDate : '');
+                $product->setCurrentpublishdate($CurrentPublishDate!=='%$CurrentPublishDate%' ? $CurrentPublishDate : '');
+                $product->setPlaceid($PlaceID!=='%$PlaceID%' ? $PlaceID : '');
+                $product->setPlace($Place!=='%$Place%' ? $Place : '');
+                $product->setEditionNo($EditionNo!=='%$EditionNo%' ? $EditionNo : '');
+                $product->setCover($Cover!=='%$Cover%' ? $Cover : '');
+                $product->setDimensions($Dimensions!=='%$Dimensions%' ? $Dimensions : '');
+                $product->setPageno($PageNo!=='%$PageNo%' ? $PageNo : '');
+                $product->setAvailabilityBiblionet($Availability!=='%$Availability%' ? $Availability : '');
+                $product->setPrice($Price!=='%$Price%' ? $Price : '');
+                $product->setWeight($Weight!=='%$Weight%' ? $Weight : '');
+                $product->setAgefrom($AgeFrom!=='%$AgeFrom%' ? $AgeFrom : '');
+                $product->setAgeto($AgeTo!=='%$AgeTo%' ? $AgeTo : '');
+                $product->setDescription($Summary!=='%$Summary%' ? $Summary : '');
+                $product->setLanguageid($LanguageID!=='%$LanguageID%' ? $LanguageID : '');
+                $product->setLanguage($Language!=='%$Language%' ? $Language : '');
+                $product->setLanguageoriginalid($LanguageOriginalID!=='%$LanguageOriginalID%' ? $LanguageOriginalID : '');
+                $product->setLanguageoriginal($LanguageOriginal!=='%$LanguageOriginal%' ? $LanguageOriginal : '');
+                $product->setLanguagetranslatedfromid($LanguageTranslatedFromID!=='%$LanguageTranslatedFromID%' ? $LanguageTranslatedFromID : '');
+                $product->setLanguagetranslatedfrom($LanguageTranslatedFrom!=='%$LanguageTranslatedFrom%' ? $LanguageTranslatedFrom : '');
+                $product->setSeriesbiblionet($Series!=='%$Series%' ? $Series : '');
+                $product->setMultivolumetitle($MultiVolumeTitle!=='%$MultiVolumeTitle%' ? $MultiVolumeTitle : '');
+                $product->setVolumeno($VolumeNo!=='%$VolumeNo%' ? $VolumeNo : '');
+                $product->setVolumecount($VolumeCount!=='%$VolumeCount%' ? $VolumeCount : '');
+                $product->setSpecification($Specifications!=='%$Specifications%' ? $Specifications : '');
+                $product->setCategoryid($CategoryID!=='%$CategoryID%' ? $CategoryID : '');
+                $product->setCategorybiblionet($Category!=='%$Category%' ? $Category : '');
+                $product->setSubjectsid($SubjectsID!=='%$SubjectsID%' ? $SubjectsID : '');
+                $product->setSubjecttitle($SubjectTitle!=='%$SubjectTitle%' ? $SubjectTitle : '');
+                $product->setSubjectddc($SubjectDDC!=='%$SubjectDDC%' ? $SubjectDDC : '');
+                $product->setSubjectorder($SubjectOrder!=='%$SubjectOrder%' ? $SubjectOrder : '');
 
                 $product->save();
 
