@@ -396,7 +396,7 @@ class Custom
 
         $response = ['success' => false, 'message' => 'user is not authorised to create book'];
 
-        if ($groupId === '4') { // edw '4' einai to groupId bookCreator pou einai to mono pou mporei na dhmiourghsei vivlio
+        if ($groupId === '4') {
             try {
                 // this code snippet is REST Api for create a product
                 // it needs to be in different file with clientSearch query
@@ -415,17 +415,17 @@ class Custom
                 $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // instance of object manager
                 $product = $objectManager->create('\Magento\Catalog\Model\Product');
                 $product->setSku(
-                    ($Publisher!=='') ?
-                        $this->make_greeklish( str_replace(' ', '-', $Title.'-'.$Publisher) ) :
-                        $this->make_greeklish( str_replace(' ', '-', $Title) )
+                    ($Publisher !== '') ?
+                        $this->make_greeklish(str_replace(' ', '-', $Title . '-' . $Publisher)) :
+                        $this->make_greeklish(str_replace(' ', '-', $Title))
                 ); // Set your sku here
                 $product->setUrlKey(
-                    ($Publisher!=='') ?
-                        $this->make_greeklish( str_replace(' ', '-', $Title.'-'.$Publisher) ) :
-                        $this->make_greeklish( str_replace(' ', '-', $Title) )
+                    ($Publisher !== '') ?
+                        $this->make_greeklish(str_replace(' ', '-', $Title . '-' . $Publisher)) :
+                        $this->make_greeklish(str_replace(' ', '-', $Title))
                 );
-                $product->setName($Title); // Name of Product
-                $product->setSubtitle($Subtitle);
+                ($Title!=='') ?? $product->setName($Title);           // Name of Product
+                ($Subtitle!=='') ?? $product->setSubtitle($Subtitle);
                 $product->setAttributeSetId(4); // Attribute set id
                 $product->setStatus(1); // Status on product enabled/ disabled 1/0
                 $product->setWebsiteIds([1]);
@@ -440,50 +440,48 @@ class Custom
                         'qty' => 1
                     )
                 );
-                $product->setCoverimage($CoverImage);
-                $product->setIsbn($ISBN);
-                $product->setPublisherid($PublisherID);
-                $product->setPublisher($Publisher);
-                $product->setWriterid($WriterID);
-                $product->setWriter($Writer);
-                $product->setWritername($WriterName);
-                $product->setFirstpublishdate($FirstPublishDate);
-                $product->setCurrentpublishdate($CurrentPublishDate);
-                $product->setPlaceid($PlaceID);
-                $product->setPlace($Place);
-                $product->setEditionNo($EditionNo);
-                $product->setCover($Cover);
-                $product->setDimensions($Dimensions);
-                $product->setPageno($PageNo);
-                $product->setAvailabilityBiblionet($Availability);
-                $product->setPrice($Price);
-//                $product->set($VAT);
-                $product->setWeight($Weight);
-                $product->setAgefrom($AgeFrom);
-                $product->setAgeto($AgeTo);
-                $product->setDescription($Summary);
-//                $product->setShort_description( substr( $Summary, 0, 35));
-                $product->setLanguageid($LanguageID);
-                $product->setLanguage($Language);
-                $product->setLanguageoriginalid($LanguageOriginalID);
-                $product->setLanguageoriginal($LanguageOriginal);
-                $product->setLanguagetranslatedfromid($LanguageTranslatedFromID);
-                $product->setLanguagetranslatedfrom($LanguageTranslatedFrom);
-                $product->setSeriesbiblionet($Series);
-                $product->setMultivolumetitle($MultiVolumeTitle);
-                $product->setVolumeno($VolumeNo);
-                $product->setVolumecount($VolumeCount);
-                $product->setSpecification($Specifications);
-                $product->setCategoryid($CategoryID);
-                $product->setCategorybiblionet($Category);
-                $product->setSubjectsid($SubjectsID);
-                $product->setSubjecttitle($SubjectTitle);
-                $product->setSubjectddc($SubjectDDC);
-                $product->setSubjectorder($SubjectOrder);
+                ($CoverImage!=='') ?? $product->setCoverimage($CoverImage);
+                ($ISBN!=='') ?? $product->setIsbn($ISBN);
+                ($PublisherID!=='') ?? $product->setPublisherid($PublisherID);
+                ($Publisher!=='') ?? $product->setPublisher($Publisher);
+                ($WriterID!=='') ?? $product->setWriterid($WriterID);
+                ($Writer!=='') ?? $product->setWriter($Writer);
+                ($WriterName!=='') ?? $product->setWritername($WriterName);
+                ($FirstPublishDate!=='') ?? $product->setFirstpublishdate($FirstPublishDate);
+                ($CurrentPublishDate!=='') ?? $product->setCurrentpublishdate($CurrentPublishDate);
+                ($PlaceID!=='') ?? $product->setPlaceid($PlaceID);
+                ($Place!=='') ?? $product->setPlace($Place);
+                ($EditionNo!=='') ?? $product->setEditionNo($EditionNo);
+                ($Cover!=='') ?? $product->setCover($Cover);
+                ($Dimensions!=='') ?? $product->setDimensions($Dimensions);
+                ($PageNo!=='') ?? $product->setPageno($PageNo);
+                ($Availability!=='') ?? $product->setAvailabilityBiblionet($Availability);
+                ($Price!=='') ?? $product->setPrice($Price);
+                ($Weight!=='') ?? $product->setWeight($Weight);
+                ($AgeFrom!=='') ?? $product->setAgefrom($AgeFrom);
+                ($AgeTo!=='') ?? $product->setAgeto($AgeTo);
+                ($Summary!=='') ?? $product->setDescription($Summary);
+                ($LanguageID!=='') ?? $product->setLanguageid($LanguageID);
+                ($Language!=='') ?? $product->setLanguage($Language);
+                ($LanguageOriginalID!=='') ?? $product->setLanguageoriginalid($LanguageOriginalID);
+                ($LanguageOriginal!=='') ?? $product->setLanguageoriginal($LanguageOriginal);
+                ($LanguageTranslatedFromID!=='') ?? $product->setLanguagetranslatedfromid($LanguageTranslatedFromID);
+                ($LanguageTranslatedFrom!=='') ?? $product->setLanguagetranslatedfrom($LanguageTranslatedFrom);
+                ($Series!=='') ?? $product->setSeriesbiblionet($Series);
+                ($MultiVolumeTitle!=='') ?? $product->setMultivolumetitle($MultiVolumeTitle);
+                ($VolumeNo!=='') ?? $product->setVolumeno($VolumeNo);
+                ($VolumeCount!=='') ?? $product->setVolumecount($VolumeCount);
+                ($Specifications!=='') ?? $product->setSpecification($Specifications);
+                ($CategoryID!=='') ?? $product->setCategoryid($CategoryID);
+                ($Category!=='') ?? $product->setCategorybiblionet($Category);
+                ($SubjectsID!=='') ?? $product->setSubjectsid($SubjectsID);
+                ($SubjectTitle!=='') ?? $product->setSubjecttitle($SubjectTitle);
+                ($SubjectDDC!=='') ?? $product->setSubjectddc($SubjectDDC);
+                ($SubjectOrder!=='') ?? $product->setSubjectorder($SubjectOrder);
 
                 $product->save();
 
-                $response = ['success' => true, 'message' => 'A book with sku '. $this->make_greeklish( str_replace(' ', '-', $Title) ) . ' created successfully'];
+                $response = ['success' => true, 'message' => 'A book with sku ' . $this->make_greeklish(str_replace(' ', '-', $Title)) . ' created successfully'];
             } catch (Exception $e) {
                 $response = ['success' => false, 'message' => $e->getMessage()];
                 $this->logger->info($e->getMessage());
