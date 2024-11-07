@@ -32,6 +32,13 @@ interface CustomInterface
 
 
     /**
+     * @return string
+     * @api
+     */
+    public function deleteBook(): string;
+
+
+    /**
      * GET for Post api
      * @param string $customerId
      * @param string $Title

@@ -342,6 +342,19 @@ class Custom
           return $response;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function deleteBook() {
+        $productID = 2589;
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $product = $objectManager->create('Magento\Catalog\Model\Product');
+        $product->load($productID)->delete();
+
+        $response = ['success' => true];
+        return json_encode($response);
+    }
+
 
 
     /**

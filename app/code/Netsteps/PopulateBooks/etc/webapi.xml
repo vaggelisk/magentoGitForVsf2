@@ -22,6 +22,12 @@
             <resource ref="anonymous" />
         </resources>
     </route>
+    <route method="POST" url="/V1/custom/delete-book/problem" >
+        <service class="Netsteps\PopulateBooks\Api\CustomInterface" method="deleteBook" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
     <route method="POST" url="/V1/custom/create-book/new">
         <service class="Netsteps\PopulateBooks\Api\CustomInterface" method="createBook"/>
         <resources>
