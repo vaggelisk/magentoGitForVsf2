@@ -346,7 +346,7 @@ class Custom
      * @inheritdoc
      */
     public function deleteBook() {
-        $productID = 2589;
+        $productID = 2590;
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $product = $objectManager->create('Magento\Catalog\Model\Product');
         $product->load($productID)->delete();
