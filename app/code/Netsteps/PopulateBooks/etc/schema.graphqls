@@ -13,8 +13,10 @@ input ProductAttributeSortInput {
   sample_attribute: SortEnum @doc(description: "Sort by the Product Custom Attribute.")
 }
 
-interface ProductInterface @typeResolver(
-    class: "Magento\\CatalogGraphQl\\Model\\ProductInterfaceTypeResolverComposite") @doc(description:"Subtitle"
-) {
-    subtitle: String @doc(description: "Subtitle") @resolver(class: "Netsteps\\PopulateBooks\\Model\\Resolver\\Product\\GetSubtitle")
-}
+interface ProductInterface
+    @typeResolver(class: "Magento\\CatalogGraphQl\\Model\\ProductInterfaceTypeResolverComposite")
+    @doc(description:"Subtitle")
+    {
+        subtitle: String @doc(description: "Subtitle")
+        @resolver(class: "Netsteps\\PopulateBooks\\Model\\Resolver\\Product\\GetSubtitle")
+    }
