@@ -76,6 +76,7 @@
             <parameter name="SubjectTitle" >%SubjectTitle%</parameter>
             <parameter name="SubjectDDC" >%SubjectDDC%</parameter>
             <parameter name="SubjectOrder" >%SubjectOrder%</parameter>
+            <parameter name="Contributor" >%Contributor%</parameter>
         </data>
     </route>
 </routes>

@@ -22,6 +22,8 @@ use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\ValidatorException;
 use Magento\Framework\Filesystem;
 use Magento\MediaStorage\Model\File\UploaderFactory;
+use Magento\Framework\Data\OptionSourceInterface;
+use Magento\Eav\Model\Config;
 
 class Custom
 {
@@ -108,6 +110,8 @@ class Custom
      */
     protected Token $token;
 
+    protected Config $eavConfig;
+
     private ?string $bookTitle;
 
     public function __construct(
@@ -118,7 +122,8 @@ class Custom
         Context $httpContext,
         CustomerRepositoryInterface $customerRepository,
         CurlFactory $curlFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Config        $eavConfig
       )
       {
           $this->request = $request;
@@ -130,6 +135,7 @@ class Custom
           $this->httpContext = $httpContext;
           $this->curlFactory = $curlFactory;
           $this->logger = $logger;
+          $this->eavConfig = $eavConfig;
       }
 
     protected function getSearchParams()
@@ -356,9 +362,9 @@ class Custom
     }
 
 
-
     /**
      * @inheritdoc
+     * @throws LocalizedException
      */
     public function createBook($customerId,
                                $Title,
@@ -402,10 +408,22 @@ class Custom
                                $SubjectTitle,
                                $SubjectDDC,
                                $SubjectOrder,
+                               $Contributor,
     ): string
     {
         $customer = $this->customerRepository->getById($customerId);
         $groupId = $customer->getGroupId();
+
+        // these 8 lines bring an array of the vales of the specific customAttribute 'contributor' [216, 217, ...]
+        $attribute = $this->eavConfig->getAttribute('catalog_product', 'contributor');
+        $options = $attribute->getSource()->getAllOptions();
+        $defaultOption = $attribute->getDefaultValue();
+        $contributorOptions = array();
+        foreach ($options as $option) {
+            if ($option['value'] > 0) {
+                $contributorOptions[] = $option['value'];
+            }
+        }
 
         $response = ['success' => false, 'message' => 'user is not authorised to create book'];
 
@@ -421,11 +439,7 @@ class Custom
                 $writer = new Zend_Log_Writer_Stream(BP . '/var/log/system.log');
                 $logger = new Zend_Log();
                 $logger->addWriter($writer);
-                $logger->log( print_r( gettype($Publisher), 1),1);
-                $logger->log( print_r( $Publisher, 1),1);
-                $logger->log( print_r( gettype($Subtitle), 1),1);
-                $logger->log( print_r($Subtitle, 1),1);
-//                $logger->log( print_r($PublisherID, 1),1);
+                $logger->log( print_r( gettype($Contributor), 1),1);
 
 
                 $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // instance of object manager
@@ -494,6 +508,10 @@ class Custom
                 $product->setSubjecttitle($SubjectTitle!=='%SubjectTitle%' ? $SubjectTitle : '');
                 $product->setSubjectddc($SubjectDDC!=='%SubjectDDC%' ? $SubjectDDC : '');
                 $product->setSubjectorder($SubjectOrder!=='%SubjectOrder%' ? $SubjectOrder : '');
+                $product->setContributor( in_array($Contributor, $contributorOptions) ?
+                    $Contributor :
+                    (is_null($defaultOption) || $defaultOption==='' ? $contributorOptions[0] : $defaultOption)
+                );
 
                 $product->save();
 
