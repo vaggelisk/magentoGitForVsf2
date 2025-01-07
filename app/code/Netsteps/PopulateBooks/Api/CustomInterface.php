@@ -82,6 +82,7 @@ interface CustomInterface
      * @param string $SubjectTitle
      * @param string $SubjectDDC
      * @param string $SubjectOrder
+     * @param int $Contributor
      * @return string
      * @api
      */
@@ -128,5 +129,6 @@ interface CustomInterface
         string $SubjectTitle,
         string $SubjectDDC,
         string $SubjectOrder,
+        int $Contributor,
     ): string;
 }
