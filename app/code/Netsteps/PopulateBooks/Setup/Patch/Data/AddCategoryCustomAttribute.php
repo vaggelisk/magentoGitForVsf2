@@ -5,10 +5,8 @@ use Magento\Eav\Setup\EavSetup;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Catalog\Model\Category;
 
-
-class AddCategoryCustomAttribute2 implements DataPatchInterface
+class AddCategoryCustomAttribute implements DataPatchInterface
 {
     private $moduleDataSetup;
     private $eavSetupFactory;
@@ -29,16 +27,16 @@ class AddCategoryCustomAttribute2 implements DataPatchInterface
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
 
         $eavSetup->addAttribute(
-            Category::ENTITY,
-            'category_number_minimal', // attribute_code
+            \Magento\Catalog\Model\Category::ENTITY,
+            'custom_category_note', // attribute_code
             [
-                'type'         => 'decimal',  // stored in catalog_category_entity_decimal
-                'label'        => 'Category Number Minimal',
-                'input'        => 'text',     // admin input field is still text, but only decimals allowed
+                'type'         => 'text',   // storage type
+                'label'        => 'Category Number Notes', // label in admin
+                'input'        => 'textarea', // input type (text, select, boolean, textarea, etc.)
                 'required'     => false,
-                'sort_order'   => 120,
+                'sort_order'   => 100,
                 'global'       => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_STORE,
-                'group'        => 'General Information',
+                'group'        => 'General Information', // tab in category form
                 'visible'      => true,
                 'user_defined' => true,
             ]
@@ -57,3 +55,4 @@ class AddCategoryCustomAttribute2 implements DataPatchInterface
         return [];
     }
 }
+

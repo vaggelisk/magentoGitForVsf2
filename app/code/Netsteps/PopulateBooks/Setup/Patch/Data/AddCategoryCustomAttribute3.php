@@ -8,7 +8,7 @@ use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Catalog\Model\Category;
 
 
-class AddCategoryCustomAttribute2 implements DataPatchInterface
+class AddCategoryCustomAttribute3 implements DataPatchInterface
 {
     private $moduleDataSetup;
     private $eavSetupFactory;
@@ -30,13 +30,13 @@ class AddCategoryCustomAttribute2 implements DataPatchInterface
 
         $eavSetup->addAttribute(
             Category::ENTITY,
-            'category_number_minimal', // attribute_code
+            'category_number_maximum', // attribute_code
             [
                 'type'         => 'decimal',  // stored in catalog_category_entity_decimal
-                'label'        => 'Category Number Minimal',
+                'label'        => 'Category Number Maximum',
                 'input'        => 'text',     // admin input field is still text, but only decimals allowed
                 'required'     => false,
-                'sort_order'   => 120,
+                'sort_order'   => 130,
                 'global'       => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_STORE,
                 'group'        => 'General Information',
                 'visible'      => true,
