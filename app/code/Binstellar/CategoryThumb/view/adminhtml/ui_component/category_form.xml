@@ -37,16 +37,6 @@
                 </item>
             </argument>
         </field>
-        <field name="category_number_minimum" sortOrder="43">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="required" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">string</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="label" translate="true" xsi:type="string">Category Number Minimum</item>
-                </item>
-            </argument>
-        </field>
         <field name="is_display_on_homepage" sortOrder="40">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
