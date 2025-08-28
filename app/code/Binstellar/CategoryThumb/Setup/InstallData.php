@@ -89,24 +89,6 @@ class InstallData implements InstallDataInterface
             ]
         );
 
-        $eavSetup->addAttribute(
-            \Magento\Catalog\Model\Category::ENTITY,
-            'category_number_minimum',
-            [
-                'type' => 'text',
-                'label' => 'Category Number Minimum',
-                'input' => 'text',
-                'required' => false,
-                'global' => ScopedAttributeInterface::SCOPE_STORE,
-                'group' => 'General Information',
-                'is_html_allowed_on_front' => true,
-                'used_in_product_listing' => true, // for category pages
-                'visible_on_front' => true, // for frontend??
-                'is_used_in_grid' => true, // for category pages
-                'is_visible_in_grid' => true // for category pages
-            ]
-        );
-
 		$setup->endSetup();
 	}
 }
