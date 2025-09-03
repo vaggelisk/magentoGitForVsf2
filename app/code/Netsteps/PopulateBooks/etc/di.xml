@@ -6,6 +6,9 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="examplePopulateBooks" xsi:type="object">Netsteps\PopulateBooks\Console\Populate</item>
+                <item name="netsteps_populatebooks_setcategorytoproducts" xsi:type="object">
+                    Netsteps\PopulateBooks\Console\Command\SetCategoryToProductsCommand
+                </item>
             </argument>
         </arguments>
     </type>
