@@ -69,6 +69,9 @@ class SetCategoryToProductsCommand extends Command
         $categoryCollection = $this->categoryCollectionFactory->create();
         $categoryCollection->addAttributeToSelect(['name', 'category_number_minimal', 'category_number_maximum']);
 
+        $this->appState->setAreaCode('adminhtml'); // or 'frontend'
+
+        
         $count = 0;
         foreach ($productCollection as $product) {
             if ($count < 1) {
@@ -80,7 +83,9 @@ class SetCategoryToProductsCommand extends Command
                 foreach ($categoryCollection as $category) {
                     $categoryNumberMinimal = $category->getData('category_number_minimal');
                     $categoryNumberMaximum = $category->getData('category_number_maximum');
-
+                    $price = $product->getPrice(); // Base price (regular price)
+                    $finalPrice = $product->getFinalPrice(); // After special price, catalog rules, etc.
+                    
                     $compareMessage = "";
 
                     if ($productSubjectDDC && $categoryNumberMinimal && $categoryNumberMaximum) {
@@ -90,7 +95,6 @@ class SetCategoryToProductsCommand extends Command
                             $productId  = $product->getId();
 
                             try {
-                                $this->appState->setAreaCode('adminhtml'); // or 'frontend'
                                 $existingCategoryIds = $product->getCategoryIds();
 
                                 // ✅ Get this category + all its parents
@@ -102,8 +106,12 @@ class SetCategoryToProductsCommand extends Command
 
                                 // Merge with existing categories
                                 $newCategoryIds = array_unique(array_merge($existingCategoryIds, $categoryPathIds));
-
                                 $product->setCategoryIds($newCategoryIds);
+
+                                if (!$product->getPrice() || $product->getPrice() <= 0) {
+                                    $product->setPrice(100); // Set price to 100
+                                }
+                                                                
                                 $this->productRepository->save($product);
 
 
