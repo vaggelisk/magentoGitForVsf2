@@ -1,3 +1,74 @@
+# Magento 2 .gitignore
+
+# Composer dependencies
+/vendor/
+/composer.lock
+
+# Magento generated files
+/generated/
+/var/
+/pub/static/*
+!/pub/static/.htaccess
+
+# Cache and logs
+/var/cache/
+/var/composer_home/
+/var/page_cache/
+/var/view_preprocessed/
+/var/log/
+/var/report/
+/var/session/
+/var/tmp/
+
+# Dependency injection metadata
+/var/di/
+/var/generation/
+
+# Static content
+
+# Media (optional — keep only if managed outside git)
+/pub/media/*
+!/pub/media/.htaccess
+
+# Environment-specific config
+/app/etc/env.php
+/app/etc/config.php   # Only ignore this if you are not using config export
+
+# IDE and OS files
+.idea/
+*.iml
+*.swp
+*.DS_Store
+*.bak
+*.tmp
+
+# Node dependencies
+/node_modules/
+
+# PHPUnit
+.phpunit.result.cache
+
+# Grunt / Frontend tools
+/.sass-cache/
+/.grunt/
+/.yarn/
+/dist/
+/build/
+
+# Docker / Vagrant
+/.docker/
+/.dockerignore
+/.vagrant/
+/docker-compose*.yml
+
+# Others
+/auth.json
+*.log
+*.gz
+*.zip
+*.tar
+*.tar.gz
+
 /README.md
 /.buildpath
 /.cache
@@ -17,7 +88,6 @@ atlassian*
 /.gitattributes
 /app/config_sandbox
 /app/etc/config.php
-/app/etc/env.php
 /app/code/Magento/TestModule*
 /lib/internal/flex/uploader/.actionScriptProperties
 /lib/internal/flex/uploader/.flexProperties
@@ -37,7 +107,6 @@ atlassian*
 /.php-cs-fixer.cache
 /grunt-config.json
 /pub/media/*.*
-!/pub/media/.htaccess
 /pub/media/attribute/*
 !/pub/media/attribute/.htaccess
 /pub/media/analytics/*
@@ -63,8 +132,6 @@ atlassian*
 /pub/media/captcha/*
 /pub/media/sitemap/*
 !/pub/media/sitemap/.htaccess
-/pub/static/*
-!/pub/static/.htaccess
 
 /var/*
 !/var/.htaccess
