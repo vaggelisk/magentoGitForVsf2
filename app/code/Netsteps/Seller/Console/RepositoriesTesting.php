@@ -15,6 +15,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RepositoriesTesting extends Command
 {
+    /**
+     * @var State
+     */
+    private State $state;
+
+
     protected function configure()
     {
         $this->setName('netsteps:testing_repositories');
@@ -26,7 +32,7 @@ class RepositoriesTesting extends Command
         State $state
     )
     {
-        $this->_state = $state;
+        $this->state = $state;
         parent::__construct();
     }
 

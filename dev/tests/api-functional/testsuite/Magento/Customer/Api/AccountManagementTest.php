@@ -265,6 +265,7 @@ class AccountManagementTest extends WebapiAbstract
             $customerData[Customer::ID],
             [
                 'id' => $customerData[Customer::ID],
+                'addresses' => $customerData[Customer::KEY_ADDRESSES],
                 'confirmation' => CustomerHelper::CONFIRMATION
             ]
         );
@@ -656,7 +657,6 @@ class AccountManagementTest extends WebapiAbstract
     public function testEmailAvailable()
     {
         $config = $this->objectManager->get(ScopeConfigInterface::class);
-
         $customerData = $this->_createCustomer();
 
         $serviceInfo = [
