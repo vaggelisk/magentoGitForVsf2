@@ -25,11 +25,11 @@
         "divante/magento2-vsbridge-indexer-msi": "^0.2.0",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~2.0",
-        "magento/module-catalog-graph-ql-aux": "^0.8.2",
-        "magento/module-eav-graph-ql-aux": "^0.8.2",
+        "magento/module-catalog-graph-ql-aux": "^0.10.2",
         "magento/module-newsletter": "^100.4",
         "magento/module-newsletter-graph-ql": "^100.4",
-        "magento/product-community-edition": "2.4.7"
+        "magento/product-community-edition": "2.4.7",
+        "magento/pwa": "^0.10.2"
     },
     "autoload": {
         "exclude-from-classmap": [

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1ce197f9c04526a74d75408e23ee8c5",
+    "content-hash": "97463251263e38e9ff2b555058ac6963",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -228,16 +228,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.356.22",
+            "version": "3.356.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5b3f65a158a0e822586d110192ee78c6565b4f06"
+                "reference": "d78bd3b221890aac679ec3b6cb5abcb01fd42699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5b3f65a158a0e822586d110192ee78c6565b4f06",
-                "reference": "5b3f65a158a0e822586d110192ee78c6565b4f06",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d78bd3b221890aac679ec3b6cb5abcb01fd42699",
+                "reference": "d78bd3b221890aac679ec3b6cb5abcb01fd42699",
                 "shasum": ""
             },
             "require": {
@@ -319,9 +319,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.356.22"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.356.25"
             },
-            "time": "2025-09-19T18:25:30+00:00"
+            "time": "2025-09-24T18:08:25+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -4694,16 +4694,16 @@
         },
         {
             "name": "laminas/laminas-view",
-            "version": "2.41.0",
+            "version": "2.42.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-view.git",
-                "reference": "77bb5814062fb485dc67baa22ea4b83cc93f7e1d"
+                "reference": "535128105bd0e703fba6f60800bbac0252819730"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/77bb5814062fb485dc67baa22ea4b83cc93f7e1d",
-                "reference": "77bb5814062fb485dc67baa22ea4b83cc93f7e1d",
+                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/535128105bd0e703fba6f60800bbac0252819730",
+                "reference": "535128105bd0e703fba6f60800bbac0252819730",
                 "shasum": ""
             },
             "require": {
@@ -4729,7 +4729,7 @@
             "require-dev": {
                 "laminas/laminas-authentication": "^2.18",
                 "laminas/laminas-coding-standard": "~3.1.0",
-                "laminas/laminas-feed": "^2.24.0",
+                "laminas/laminas-feed": "^2.25.0",
                 "laminas/laminas-filter": "^2.41",
                 "laminas/laminas-http": "^2.22",
                 "laminas/laminas-i18n": "^2.30.0",
@@ -4742,9 +4742,9 @@
                 "laminas/laminas-permissions-acl": "^2.17",
                 "laminas/laminas-router": "^3.14.0",
                 "laminas/laminas-uri": "^2.13",
-                "phpunit/phpunit": "^10.5.48",
+                "phpunit/phpunit": "^10.5.53",
                 "psalm/plugin-phpunit": "^0.19.5",
-                "vimeo/psalm": "^6.13.0"
+                "vimeo/psalm": "^6.13.1"
             },
             "suggest": {
                 "laminas/laminas-authentication": "Laminas\\Authentication component",
@@ -4792,7 +4792,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2025-08-07T08:55:27+00:00"
+            "time": "2025-09-23T11:38:01+00:00"
         },
         {
             "name": "league/flysystem",
@@ -7487,20 +7487,20 @@
         },
         {
             "name": "magento/module-catalog-graph-ql-aux",
-            "version": "0.8.2",
+            "version": "0.10.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-catalog-graph-ql-aux/magento-module-catalog-graph-ql-aux-0.8.2.0.zip",
-                "shasum": "7f63023b7c9f41a945a6b6c666fbd2d143fa577e"
+                "url": "https://repo.magento.com/archives/magento/module-catalog-graph-ql-aux/magento-module-catalog-graph-ql-aux-0.10.2.0.zip",
+                "shasum": "586ff3761fb4224b4bc6af7d10db2da3cb11759c"
             },
             "require": {
                 "magento/framework": "*",
                 "magento/module-catalog": "*",
                 "magento/module-catalog-graph-ql": "*",
                 "magento/module-eav": "*",
-                "magento/module-eav-graph-ql-aux": "0.8.*",
+                "magento/module-eav-graph-ql-aux": "0.10.*",
                 "magento/module-store": "*",
-                "php": "~8.1.0||~8.2.0||~8.3.0"
+                "php": "~8.2.0||~8.3.0||~8.4.0"
             },
             "type": "magento2-module",
             "autoload": {
@@ -8456,6 +8456,37 @@
             "description": "N/A"
         },
         {
+            "name": "magento/module-contact-graph-ql-pwa",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/module-contact-graph-ql-pwa/magento-module-contact-graph-ql-pwa-0.10.2.0.zip",
+                "shasum": "1835fc8ced47db577591dc8590dd728ba87da205"
+            },
+            "require": {
+                "magento/framework": "*",
+                "magento/module-contact": "*",
+                "php": "~8.2.0||~8.3.0||~8.4.0"
+            },
+            "suggest": {
+                "magento/module-graph-ql": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\ContactGraphQlPwa\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Provides GraphQl functionality for the contact-us form."
+        },
+        {
             "name": "magento/module-cookie",
             "version": "100.4.7",
             "dist": {
@@ -8731,6 +8762,37 @@
             "description": "N/A"
         },
         {
+            "name": "magento/module-customer-graph-ql-pwa",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/module-customer-graph-ql-pwa/magento-module-customer-graph-ql-pwa-0.10.2.0.zip",
+                "shasum": "e79c28230dfa4717886fb3e1221cc99059a9a88d"
+            },
+            "require": {
+                "magento/framework": "*",
+                "php": "~8.2.0||~8.3.0||~8.4.0"
+            },
+            "suggest": {
+                "magento/module-customer-graph-ql": "*",
+                "magento/module-graph-ql": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\CustomerGraphQlPwa\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "N/A"
+        },
+        {
             "name": "magento/module-customer-import-export",
             "version": "100.4.7",
             "dist": {
@@ -8765,11 +8827,11 @@
         },
         {
             "name": "magento/module-data-exporter",
-            "version": "103.4.11",
+            "version": "103.4.13",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-data-exporter/magento-module-data-exporter-103.4.11.0.zip",
-                "shasum": "d8a87eef0353818dc1be1d80427f15f1477f6863"
+                "url": "https://repo.magento.com/archives/magento/module-data-exporter/magento-module-data-exporter-103.4.13.0.zip",
+                "shasum": "6df293e098dff7fade5596dca40a7ecba05c1ff6"
             },
             "require": {
                 "magento/framework": ">=103.0.4",
@@ -9136,18 +9198,18 @@
         },
         {
             "name": "magento/module-eav-graph-ql-aux",
-            "version": "0.8.2",
+            "version": "0.10.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-eav-graph-ql-aux/magento-module-eav-graph-ql-aux-0.8.2.0.zip",
-                "shasum": "8e214c34a29d293ae551f12c065f159fae1ba7e6"
+                "url": "https://repo.magento.com/archives/magento/module-eav-graph-ql-aux/magento-module-eav-graph-ql-aux-0.10.2.0.zip",
+                "shasum": "d60e3ff1dca1b4eb702feab1ca58e1e4c7647042"
             },
             "require": {
                 "magento/framework": "*",
                 "magento/module-eav": "*",
                 "magento/module-eav-graph-ql": "*",
                 "magento/module-store": "*",
-                "php": "~8.1.0||~8.2.0||~8.3.0"
+                "php": "~8.2.0||~8.3.0||~8.4.0"
             },
             "suggest": {
                 "magento/module-graph-ql": "*"
@@ -13869,6 +13931,38 @@
             "description": "Provides GraphQl functionality for the newsletter subscriptions."
         },
         {
+            "name": "magento/module-newsletter-graph-ql-pwa",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/module-newsletter-graph-ql-pwa/magento-module-newsletter-graph-ql-pwa-0.10.2.0.zip",
+                "shasum": "aec42c966724a99b942fdba5ba31711c09597881"
+            },
+            "require": {
+                "magento/framework": "*",
+                "php": "~8.2.0||~8.3.0||~8.4.0"
+            },
+            "suggest": {
+                "magento/module-graph-ql": "*",
+                "magento/module-newsletter": "*",
+                "magento/module-store": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\NewsletterGraphQlPwa\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Provides additional GraphQl functionality for the newsletter subscriptions in PWA."
+        },
+        {
             "name": "magento/module-offline-payments",
             "version": "100.4.5",
             "dist": {
@@ -14175,6 +14269,37 @@
             "description": "Page Builder Analytics module"
         },
         {
+            "name": "magento/module-page-builder-pwa",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/module-page-builder-pwa/magento-module-page-builder-pwa-0.10.2.0.zip",
+                "shasum": "14741c14bd76b10aeee7b23277044d83b2d0ff1a"
+            },
+            "require": {
+                "magento/framework": "*",
+                "magento/module-cms": "*",
+                "magento/module-eav-graph-ql-aux": "0.10.*",
+                "magento/module-page-builder": "*",
+                "php": "~8.2.0||~8.3.0||~8.4.0",
+                "phpgt/dom": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\PageBuilderPwa\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Provides additions to Page Builder for PWA."
+        },
+        {
             "name": "magento/module-page-cache",
             "version": "100.4.7",
             "dist": {
@@ -14273,11 +14398,11 @@
         },
         {
             "name": "magento/module-payment-services-base",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-payment-services-base/magento-module-payment-services-base-2.12.1.0.zip",
-                "shasum": "727da8ac772a85f3016407523b6cdff13d351c47"
+                "url": "https://repo.magento.com/archives/magento/module-payment-services-base/magento-module-payment-services-base-2.12.2.0.zip",
+                "shasum": "999375a7a603e84455c897548f4400ea2774a995"
             },
             "require": {
                 "magento/framework": ">=103.0.4 <104.0.0",
@@ -14285,10 +14410,10 @@
                 "magento/module-config": ">=101.2.4 <102.0.0",
                 "magento/module-directory": ">=100.4.4 <101.0.0",
                 "magento/module-payment": ">=100.4.4 <101.0.0",
-                "magento/module-payment-services-dashboard": "2.12.1",
-                "magento/module-payment-services-paypal": "2.12.1",
+                "magento/module-payment-services-dashboard": "2.12.2",
+                "magento/module-payment-services-paypal": "2.12.2",
                 "magento/module-sales": ">=103.0.4 <104.0.0",
-                "magento/module-service-proxy": "2.12.1",
+                "magento/module-service-proxy": "2.12.2",
                 "magento/module-services-id": "^3.2.0",
                 "magento/module-services-id-graph-ql-server": "^1.1.0",
                 "magento/module-services-id-layout": "^1.1.0",
@@ -14317,20 +14442,20 @@
         },
         {
             "name": "magento/module-payment-services-dashboard",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-payment-services-dashboard/magento-module-payment-services-dashboard-2.12.1.0.zip",
-                "shasum": "21c2e10410a53aa1793eef9fb79a48780faee89a"
+                "url": "https://repo.magento.com/archives/magento/module-payment-services-dashboard/magento-module-payment-services-dashboard-2.12.2.0.zip",
+                "shasum": "86904c8cd2b258deb9a8f2ac91d43e59402ac80c"
             },
             "require": {
                 "ext-json": "*",
                 "magento/framework": ">=103.0.4 <104.0.0",
                 "magento/module-backend": ">=102.0.4 <103.0.0",
                 "magento/module-config": ">=101.2.4 <102.0.0",
-                "magento/module-payment-services-base": "2.12.1",
-                "magento/module-payment-services-paypal": "2.12.1",
-                "magento/module-service-proxy": "2.12.1",
+                "magento/module-payment-services-base": "2.12.2",
+                "magento/module-payment-services-paypal": "2.12.2",
+                "magento/module-service-proxy": "2.12.2",
                 "magento/module-store": ">=101.1.4 <102.0.0",
                 "php": "~8.1.0||~8.2.0||~8.3.0||~8.4.0"
             },
@@ -14351,11 +14476,11 @@
         },
         {
             "name": "magento/module-payment-services-paypal",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-payment-services-paypal/magento-module-payment-services-paypal-2.12.1.0.zip",
-                "shasum": "81dcdc739a2734a19ae8e25d67c5a71a28b387fe"
+                "url": "https://repo.magento.com/archives/magento/module-payment-services-paypal/magento-module-payment-services-paypal-2.12.2.0.zip",
+                "shasum": "00ff7e9a0bf4e244de8f4e9ae49e7e1581d82fd0"
             },
             "require": {
                 "magento/framework": ">=103.0.4 <104.0.0",
@@ -14371,12 +14496,12 @@
                 "magento/module-instant-purchase": ">=100.4.3 <101.0.0",
                 "magento/module-integration": ">=100.4.4 <101.0.0",
                 "magento/module-payment": ">=100.4.4 <101.0.0",
-                "magento/module-payment-services-base": "2.12.1",
+                "magento/module-payment-services-base": "2.12.2",
                 "magento/module-query-xml": "^103.0.3",
                 "magento/module-quote": ">=101.2.4 <102.0.0",
                 "magento/module-sales": ">=103.0.4 <104.0.0",
                 "magento/module-sales-rule": ">=101.2.4 <102.0.0",
-                "magento/module-service-proxy": "2.12.1",
+                "magento/module-service-proxy": "2.12.2",
                 "magento/module-store": ">=101.1.4 <102.0.0",
                 "magento/module-tax": ">=100.4.4 <101.0.0",
                 "magento/module-theme": ">=101.1.4 <102.0.0",
@@ -14400,18 +14525,18 @@
         },
         {
             "name": "magento/module-payment-services-paypal-graph-ql",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-payment-services-paypal-graph-ql/magento-module-payment-services-paypal-graph-ql-2.12.1.0.zip",
-                "shasum": "82ae846297957b5e31347d16158dfbbe6381901d"
+                "url": "https://repo.magento.com/archives/magento/module-payment-services-paypal-graph-ql/magento-module-payment-services-paypal-graph-ql-2.12.2.0.zip",
+                "shasum": "49e5ba84edb28c406a5b4ccff2b550d172d1e101"
             },
             "require": {
                 "magento/framework": ">=103.0.4 <104.0.0",
                 "magento/module-csp": ">=100.4.3 <101.0.0",
                 "magento/module-customer": ">=103.0.4 <104.0.0",
                 "magento/module-graph-ql": ">=100.4.4 <101.0.0",
-                "magento/module-payment-services-paypal": "2.12.1",
+                "magento/module-payment-services-paypal": "2.12.2",
                 "magento/module-quote": ">=101.2.4 <102.0.0",
                 "magento/module-quote-graph-ql": ">=100.4.4 <101.0.0",
                 "magento/module-sales": ">=103.0.4 <104.0.0",
@@ -14436,20 +14561,20 @@
         },
         {
             "name": "magento/module-payment-services-saas-export",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-payment-services-saas-export/magento-module-payment-services-saas-export-2.12.1.0.zip",
-                "shasum": "2015ce02f76a36324b732f63271eea2c2d6ecfc5"
+                "url": "https://repo.magento.com/archives/magento/module-payment-services-saas-export/magento-module-payment-services-saas-export-2.12.2.0.zip",
+                "shasum": "d4feb9723c89713fd21c34076f5aaaea4029c202"
             },
             "require": {
                 "magento/framework": ">=103.0.4 <104.0.0",
                 "magento/module-data-exporter": "^103.0.3",
-                "magento/module-payment-services-base": "2.12.1",
+                "magento/module-payment-services-base": "2.12.2",
                 "magento/module-saas-common": "^103.0.3",
-                "magento/module-sales-data-exporter": "2.12.1",
+                "magento/module-sales-data-exporter": "2.12.2",
                 "magento/module-services-id": "^3.2.0",
-                "magento/module-store-data-exporter": "2.12.1",
+                "magento/module-store-data-exporter": "2.12.2",
                 "magento/services-connector": "^1.3.0",
                 "php": "~8.1.0||~8.2.0||~8.3.0||~8.4.0"
             },
@@ -14703,11 +14828,11 @@
         },
         {
             "name": "magento/module-query-xml",
-            "version": "103.4.11",
+            "version": "103.4.13",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-query-xml/magento-module-query-xml-103.4.11.0.zip",
-                "shasum": "cdfdfec3bd841cf1ac61744ca7d8db952e72bb8a"
+                "url": "https://repo.magento.com/archives/magento/module-query-xml/magento-module-query-xml-103.4.13.0.zip",
+                "shasum": "d927ddcde6f5b6d0b8fdf2599e96d656ad3f1a67"
             },
             "require": {
                 "magento/framework": ">=103.0.4",
@@ -15113,6 +15238,40 @@
             "description": "Google reCAPTCHA integration for Magento2"
         },
         {
+            "name": "magento/module-re-captcha-graph-ql-pwa",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/module-re-captcha-graph-ql-pwa/magento-module-re-captcha-graph-ql-pwa-0.10.2.0.zip",
+                "shasum": "2d3c670a3d0e62b048318155d40ae5118e73e8d9"
+            },
+            "require": {
+                "magento/framework": "*",
+                "magento/module-re-captcha-frontend-ui": "*",
+                "magento/module-re-captcha-validation-api": "*",
+                "magento/module-re-captcha-version-3-invisible": "*",
+                "php": "~8.2.0||~8.3.0||~8.4.0"
+            },
+            "suggest": {
+                "magento/module-graph-ql": "*",
+                "magento/security-package": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\ReCaptchaGraphQlPwa\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Provides GraphQl support for ReCaptcha in PWA."
+        },
+        {
             "name": "magento/module-re-captcha-migration",
             "version": "1.1.4",
             "dist": {
@@ -15200,6 +15359,42 @@
                 "OSL-3.0"
             ],
             "description": "Google reCaptcha integration for Magento2 PayPal PayflowPro payment form"
+        },
+        {
+            "name": "magento/module-re-captcha-pwa",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/module-re-captcha-pwa/magento-module-re-captcha-pwa-0.10.2.0.zip",
+                "shasum": "8e12d58f44fb4a94f23bd234e2cf2f962a50e038"
+            },
+            "require": {
+                "magento/framework": "*",
+                "magento/module-checkout": "*",
+                "magento/module-config": "*",
+                "magento/module-customer-graph-ql": "*",
+                "magento/module-quote-graph-ql": "*",
+                "magento/module-re-captcha-checkout": "*",
+                "magento/module-re-captcha-customer": "*",
+                "magento/module-re-captcha-ui": "*",
+                "magento/module-re-captcha-validation-api": "*",
+                "magento/module-re-captcha-webapi-api": "*",
+                "php": "~8.2.0||~8.3.0 ||~8.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\ReCaptchaPwa\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Adds warnings and config validation to Magento ReCaptcha modules."
         },
         {
             "name": "magento/module-re-captcha-review",
@@ -15995,11 +16190,11 @@
         },
         {
             "name": "magento/module-saas-common",
-            "version": "103.4.11",
+            "version": "103.4.13",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-saas-common/magento-module-saas-common-103.4.11.0.zip",
-                "shasum": "157ebf3356830f12801f33bd6ec53bb6c73f0e40"
+                "url": "https://repo.magento.com/archives/magento/module-saas-common/magento-module-saas-common-103.4.13.0.zip",
+                "shasum": "98f709f2d9cc347bbe2287e90d23191e506cda66"
             },
             "require": {
                 "magento/framework": ">=103.0.4",
@@ -16115,11 +16310,11 @@
         },
         {
             "name": "magento/module-sales-data-exporter",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-sales-data-exporter/magento-module-sales-data-exporter-2.12.1.0.zip",
-                "shasum": "2fda0ae54bdf3f30a6ce34d778d013f9c7810dec"
+                "url": "https://repo.magento.com/archives/magento/module-sales-data-exporter/magento-module-sales-data-exporter-2.12.2.0.zip",
+                "shasum": "e5e8fd2f4ac684845fd50ebd89453c55e35e7b11"
             },
             "require": {
                 "magento/framework": ">=103.0.4 <104.0.0",
@@ -16170,6 +16365,37 @@
                 ],
                 "psr-4": {
                     "Magento\\SalesGraphQl\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "N/A"
+        },
+        {
+            "name": "magento/module-sales-graph-ql-aux",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/module-sales-graph-ql-aux/magento-module-sales-graph-ql-aux-0.10.2.0.zip",
+                "shasum": "af85a5f7b32b8550a5629d65c06278a3c8af1eb6"
+            },
+            "require": {
+                "magento/framework": "*",
+                "php": "~8.2.0||~8.3.0||~8.4.0"
+            },
+            "suggest": {
+                "magento/module-graph-ql": "*",
+                "magento/module-sales-graph-ql": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\SalesGraphQlAux\\": ""
                 }
             },
             "license": [
@@ -16506,17 +16732,17 @@
         },
         {
             "name": "magento/module-service-proxy",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-service-proxy/magento-module-service-proxy-2.12.1.0.zip",
-                "shasum": "09b0a695bf4ce2278671fae195f5af4bd1a71828"
+                "url": "https://repo.magento.com/archives/magento/module-service-proxy/magento-module-service-proxy-2.12.2.0.zip",
+                "shasum": "92994193c8b69c3057e77d49c26563ed48978c20"
             },
             "require": {
                 "magento/framework": ">=103.0.4 <104.0.0",
                 "magento/module-backend": ">=102.0.4 <103.0.0",
                 "magento/module-page-cache": ">=100.4.4 <101.0.0",
-                "magento/module-payment-services-paypal": "2.12.1",
+                "magento/module-payment-services-paypal": "2.12.2",
                 "magento/module-store": ">=101.1.4 <102.0.0",
                 "php": "~8.1.0||~8.2.0||~8.3.0||~8.4.0"
             },
@@ -16753,11 +16979,11 @@
         },
         {
             "name": "magento/module-store-data-exporter",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-store-data-exporter/magento-module-store-data-exporter-2.12.1.0.zip",
-                "shasum": "98123692b9fd05a523710a263794c890250b3901"
+                "url": "https://repo.magento.com/archives/magento/module-store-data-exporter/magento-module-store-data-exporter-2.12.2.0.zip",
+                "shasum": "9fc449a6b17f8c7dd71ccb4cad0b6e1ada2c0baf"
             },
             "require": {
                 "magento/framework": ">=103.0.4 <104.0.0",
@@ -17390,6 +17616,39 @@
             "description": "N/A"
         },
         {
+            "name": "magento/module-url-rewrite-graph-ql-pwa",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/module-url-rewrite-graph-ql-pwa/magento-module-url-rewrite-graph-ql-pwa-0.10.2.0.zip",
+                "shasum": "80470c2c4a92410e3537527c130b35a462181122"
+            },
+            "require": {
+                "magento/framework": "*",
+                "magento/module-store": "*",
+                "magento/module-url-rewrite": "*",
+                "magento/module-url-rewrite-graph-ql": "*",
+                "php": "~8.2.0||~8.3.0||~8.4.0"
+            },
+            "suggest": {
+                "magento/module-graph-ql": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\UrlRewriteGraphQlPwa\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Provides additional GraphQl functionality for URL Rewrites in PWA."
+        },
+        {
             "name": "magento/module-user",
             "version": "101.2.7",
             "dist": {
@@ -17752,6 +18011,36 @@
             "description": "N/A"
         },
         {
+            "name": "magento/module-weee-graph-ql-aux",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/module-weee-graph-ql-aux/magento-module-weee-graph-ql-aux-0.10.2.0.zip",
+                "shasum": "2006f4ebbf7b319eb853a0143730dddc0fa9e4a4"
+            },
+            "require": {
+                "magento/framework": "*",
+                "php": "~8.2.0||~8.3.0||~8.4.0"
+            },
+            "suggest": {
+                "magento/module-eav-graph-ql-aux": "0.10.*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\WeeeGraphQlAux\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "N/A"
+        },
+        {
             "name": "magento/module-widget",
             "version": "101.2.7",
             "dist": {
@@ -17918,21 +18207,21 @@
         },
         {
             "name": "magento/payment-services",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/payment-services/magento-payment-services-2.12.1.0.zip",
-                "shasum": "eed258b062a10da17338679e8daa212937c9793e"
+                "url": "https://repo.magento.com/archives/magento/payment-services/magento-payment-services-2.12.2.0.zip",
+                "shasum": "32f4147686f7178177efc8ff7f69e2a077ab6c84"
             },
             "require": {
-                "magento/module-payment-services-base": "2.12.1",
-                "magento/module-payment-services-dashboard": "2.12.1",
-                "magento/module-payment-services-paypal": "2.12.1",
-                "magento/module-payment-services-paypal-graph-ql": "2.12.1",
-                "magento/module-payment-services-saas-export": "2.12.1",
-                "magento/module-sales-data-exporter": "2.12.1",
-                "magento/module-service-proxy": "2.12.1",
-                "magento/module-store-data-exporter": "2.12.1",
+                "magento/module-payment-services-base": "2.12.2",
+                "magento/module-payment-services-dashboard": "2.12.2",
+                "magento/module-payment-services-paypal": "2.12.2",
+                "magento/module-payment-services-paypal-graph-ql": "2.12.2",
+                "magento/module-payment-services-saas-export": "2.12.2",
+                "magento/module-sales-data-exporter": "2.12.2",
+                "magento/module-service-proxy": "2.12.2",
+                "magento/module-store-data-exporter": "2.12.2",
                 "magento/services-id": "^3.2.0"
             },
             "type": "metapackage",
@@ -18267,6 +18556,30 @@
                 "AFL-3.0"
             ],
             "description": "eCommerce Platform for Growth (Community Edition)"
+        },
+        {
+            "name": "magento/pwa",
+            "version": "0.10.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/pwa/magento-pwa-0.10.2.0.zip",
+                "shasum": "f716e04d817875f75b517bf344c0a1038aae9f21"
+            },
+            "require": {
+                "magento/module-catalog-graph-ql-aux": "0.10.2",
+                "magento/module-contact-graph-ql-pwa": "0.10.2",
+                "magento/module-customer-graph-ql-pwa": "0.10.2",
+                "magento/module-eav-graph-ql-aux": "0.10.2",
+                "magento/module-newsletter-graph-ql-pwa": "0.10.2",
+                "magento/module-page-builder-pwa": "0.10.2",
+                "magento/module-re-captcha-graph-ql-pwa": "0.10.2",
+                "magento/module-re-captcha-pwa": "0.10.2",
+                "magento/module-sales-graph-ql-aux": "0.10.2",
+                "magento/module-url-rewrite-graph-ql-pwa": "0.10.2",
+                "magento/module-weee-graph-ql-aux": "0.10.2"
+            },
+            "type": "metapackage",
+            "description": "PWA metapackage"
         },
         {
             "name": "magento/security-package",
@@ -19187,24 +19500,26 @@
         },
         {
             "name": "paragonie/constant_time_encoding",
-            "version": "v3.0.0",
+            "version": "v3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "df1e7fde177501eee2037dd159cf04f5f301a512"
+                "reference": "d5b01a39b3415c2cd581d3bd3a3575c1ebbd8e77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/df1e7fde177501eee2037dd159cf04f5f301a512",
-                "reference": "df1e7fde177501eee2037dd159cf04f5f301a512",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/d5b01a39b3415c2cd581d3bd3a3575c1ebbd8e77",
+                "reference": "d5b01a39b3415c2cd581d3bd3a3575c1ebbd8e77",
                 "shasum": ""
             },
             "require": {
                 "php": "^8"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9",
-                "vimeo/psalm": "^4|^5"
+                "infection/infection": "^0",
+                "nikic/php-fuzzer": "^0",
+                "phpunit/phpunit": "^9|^10|^11",
+                "vimeo/psalm": "^4|^5|^6"
             },
             "type": "library",
             "autoload": {
@@ -19250,7 +19565,7 @@
                 "issues": "https://github.com/paragonie/constant_time_encoding/issues",
                 "source": "https://github.com/paragonie/constant_time_encoding"
             },
-            "time": "2024-05-08T12:36:18+00:00"
+            "time": "2025-09-24T15:06:41+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -25842,16 +26157,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.29",
+            "version": "1.12.31",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "0835c625a38ac6484f050077116b6668bc3ab57d"
+                "url": "https://github.com/phpstan/phpstan-phar-composer-source.git",
+                "reference": "git1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/0835c625a38ac6484f050077116b6668bc3ab57d",
-                "reference": "0835c625a38ac6484f050077116b6668bc3ab57d",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a7630bb5311a41d13a2364634c78c5f4da250d53",
+                "reference": "a7630bb5311a41d13a2364634c78c5f4da250d53",
                 "shasum": ""
             },
             "require": {
@@ -25896,7 +26211,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-16T08:46:57+00:00"
+            "time": "2025-09-24T15:58:55+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -26821,16 +27136,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "4.0.7",
+            "version": "4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "eb49b981ef0817890129cb70f774506bebe57740"
+                "reference": "14c6ba52f95a36c3d27c835d65efc7123c446e8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/eb49b981ef0817890129cb70f774506bebe57740",
-                "reference": "eb49b981ef0817890129cb70f774506bebe57740",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/14c6ba52f95a36c3d27c835d65efc7123c446e8c",
+                "reference": "14c6ba52f95a36c3d27c835d65efc7123c446e8c",
                 "shasum": ""
             },
             "require": {
@@ -26886,7 +27201,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/exporter/issues",
-                "source": "https://github.com/sebastianbergmann/exporter/tree/4.0.7"
+                "source": "https://github.com/sebastianbergmann/exporter/tree/4.0.8"
             },
             "funding": [
                 {
@@ -26906,7 +27221,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-22T05:18:21+00:00"
+            "time": "2025-09-24T06:03:27+00:00"
         },
         {
             "name": "sebastian/global-state",
