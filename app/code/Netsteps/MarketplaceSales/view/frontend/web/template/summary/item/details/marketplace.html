@@ -1,7 +1,0 @@
-<!-- ko if: hasData($parents[1]) -->
-<div class="marketplace-data">
-    <!-- ko foreach: {data: getMarketplaceData($parents[1]), as: 'itemData'} -->
-        <div data-bind="attr:{class: 'marketplace-info ' + itemData.key}, html: itemData.value"></div>
-    <!-- /ko -->
-</div>
-<!-- /ko -->
