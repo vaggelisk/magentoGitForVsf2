@@ -108,7 +108,7 @@ class SetImageToProductsCommand extends Command
                 $placeholderImage = '/assets/images/placeholders/blank_page_cover.jpg';
                 $isPlaceholder = $coverImage && trim($coverImage) === $placeholderImage;
 
-                if ($coverImage && !$brokenImage && !$isPlaceholder && $count < 10) {
+                if ($coverImage && !$brokenImage && !$isPlaceholder && $count < 900) {
 
                     $imageUrl = $biblionet.$coverImage;
 
