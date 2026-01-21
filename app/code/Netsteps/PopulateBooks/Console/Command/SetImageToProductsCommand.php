@@ -3,6 +3,7 @@ namespace Netsteps\PopulateBooks\Console\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Psr\Log\LoggerInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -67,7 +68,9 @@ class SetImageToProductsCommand extends Command
     protected function configure()
     {
         $this->setName('netsteps:populatebooks:setimagetoproducts')
-            ->setDescription('Loop through all products, get the image uri and put it to its correspond product');
+            ->setDescription('Loop through all products, get the image uri and put it to its correspond product')
+            ->addOption('start-id', null, InputOption::VALUE_OPTIONAL, 'Start iterating from this product ID (inclusive)', 0)
+            ->addOption('end-id', null, InputOption::VALUE_OPTIONAL, 'Stop iterating at this product ID (inclusive)', 0);
         parent::configure();
     }
 
@@ -75,6 +78,16 @@ class SetImageToProductsCommand extends Command
     {
         // Load all products with their names only
         $productCollection = $this->productCollectionFactory->create();
+        $startId = (int)$input->getOption('start-id');
+        $endId = (int)$input->getOption('end-id');
+
+        if ($startId > 0) {
+            $productCollection->addFieldToFilter('entity_id', ['gteq' => $startId]);
+        }
+
+        if ($endId > 0) {
+            $productCollection->addFieldToFilter('entity_id', ['lteq' => $endId]);
+        }
         $productCollection->addAttributeToSelect(['name', 'coverimage']);
         $productCollection->addMediaGalleryData();
 
@@ -92,8 +105,10 @@ class SetImageToProductsCommand extends Command
                 $id = $product->getId();
                 $coverImage = $product->getData('coverimage'); // custom attribute
                 $brokenImage = $coverImage ? substr_count($coverImage, '.jpg') >= 2 : false;
+                $placeholderImage = '/assets/images/placeholders/blank_page_cover.jpg';
+                $isPlaceholder = $coverImage && trim($coverImage) === $placeholderImage;
 
-                if ( $coverImage && !$brokenImage && $count < 10) {
+                if ($coverImage && !$brokenImage && !$isPlaceholder && $count < 10) {
 
                     $imageUrl = $biblionet.$coverImage;
 
@@ -182,6 +197,8 @@ class SetImageToProductsCommand extends Command
                     $output->writeln($message); 
                     // Log into system.log
                     $this->logger->info("Product: " . $message);
+                } elseif ($isPlaceholder) {
+                    $output->writeln("<comment>Product '{$name}' has placeholder cover; skipping.</comment>");
                 }
                 $count++;
             }

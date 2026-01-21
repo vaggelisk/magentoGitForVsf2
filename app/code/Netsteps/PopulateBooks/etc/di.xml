@@ -15,6 +15,9 @@
                 <item name="netsteps_populatebooks_list_products_without_category" xsi:type="object">
                     Netsteps\PopulateBooks\Console\Command\ListProductsWithoutCategoryCommand
                 </item>
+                <item name="netsteps_populatebooks_list_products_without_image" xsi:type="object">
+                    Netsteps\PopulateBooks\Console\Command\ListProductsWithoutImageCommand
+                </item>
             </argument>
         </arguments>
     </type>

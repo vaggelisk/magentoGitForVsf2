@@ -87,7 +87,7 @@ class SetCategoryToProductsCommand extends Command
         
         $count = 0;
         foreach ($productCollection as $product) {
-            if ($count < 700) { // Limit to first 700 products for testing
+            if ($count < 1) { // Limit to first 1 products for testing
                 $name = $product->getName();
                 $productSubjectDDC = floatval($product->getData('subjectDDC')); // custom attribute
 
