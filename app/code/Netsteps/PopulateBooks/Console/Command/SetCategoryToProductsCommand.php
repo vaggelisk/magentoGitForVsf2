@@ -3,6 +3,7 @@ namespace Netsteps\PopulateBooks\Console\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Psr\Log\LoggerInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -56,7 +57,9 @@ class SetCategoryToProductsCommand extends Command
     protected function configure()
     {
         $this->setName('netsteps:populatebooks:setcategorytoproducts')
-            ->setDescription('Loop through all products, get the subjectDDC number and put it to its correct category');
+            ->setDescription('Loop through all products, get the subjectDDC number and put it to its correct category')
+            ->addOption('start-id', null, InputOption::VALUE_OPTIONAL, 'Start iterating from this product ID (inclusive)', 0)
+            ->addOption('end-id', null, InputOption::VALUE_OPTIONAL, 'Stop iterating at this product ID (inclusive)', 0);
         parent::configure();
     }
 
@@ -64,6 +67,16 @@ class SetCategoryToProductsCommand extends Command
     {
         // Load all products with their names only
         $productCollection = $this->productCollectionFactory->create();
+        $startId = (int)$input->getOption('start-id');
+        $endId = (int)$input->getOption('end-id');
+
+        if ($startId > 0) {
+            $productCollection->addFieldToFilter('entity_id', ['gteq' => $startId]);
+        }
+
+        if ($endId > 0) {
+            $productCollection->addFieldToFilter('entity_id', ['lteq' => $endId]);
+        }
         $productCollection->addAttributeToSelect(['name', 'subjectDDC']);
         // 🔄 Load ALL categories with the custom attribute
         $categoryCollection = $this->categoryCollectionFactory->create();

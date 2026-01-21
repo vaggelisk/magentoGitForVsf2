@@ -12,6 +12,9 @@
                 <item name="netsteps_populatebooks_setimagetoproducts" xsi:type="object">
                     Netsteps\PopulateBooks\Console\Command\SetImageToProductsCommand
                 </item>
+                <item name="netsteps_populatebooks_list_products_without_category" xsi:type="object">
+                    Netsteps\PopulateBooks\Console\Command\ListProductsWithoutCategoryCommand
+                </item>
             </argument>
         </arguments>
     </type>
