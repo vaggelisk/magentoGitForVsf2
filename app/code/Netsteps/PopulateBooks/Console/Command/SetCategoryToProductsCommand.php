@@ -63,7 +63,7 @@ class SetCategoryToProductsCommand extends Command
         parent::configure();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         // Load all products with their names only
         $productCollection = $this->productCollectionFactory->create();
@@ -162,5 +162,6 @@ class SetCategoryToProductsCommand extends Command
         $output->writeln("<comment>Total products processed: $count</comment>");
         $this->logger->info("Total products processed: " . $count);
 
+        return Command::SUCCESS;
     }
 }
