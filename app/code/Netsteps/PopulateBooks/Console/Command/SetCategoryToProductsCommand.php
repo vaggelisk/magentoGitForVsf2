@@ -87,75 +87,69 @@ class SetCategoryToProductsCommand extends Command
         
         $count = 0;
         foreach ($productCollection as $product) {
-            if ($count < 1) { // Limit to first 1 products for testing
-                $name = $product->getName();
-                $productSubjectDDC = floatval($product->getData('subjectDDC')); // custom attribute
+            $name = $product->getName();
+            $productSubjectDDC = floatval($product->getData('subjectDDC')); // custom attribute
 
-                // 🔄 Loop all categories (menu)
-//                $foundProductCategory = false;
-                foreach ($categoryCollection as $category) {
-                    $categoryNumberMinimal = $category->getData('category_number_minimal');
-                    $categoryNumberMaximum = $category->getData('category_number_maximum');
-                    $price = $product->getPrice(); // Base price (regular price)
-                    $finalPrice = $product->getFinalPrice(); // After special price, catalog rules, etc.
+            // 🔄 Loop all categories (menu)
+            foreach ($categoryCollection as $category) {
+                $categoryNumberMinimal = $category->getData('category_number_minimal');
+                $categoryNumberMaximum = $category->getData('category_number_maximum');
+                $price = $product->getPrice(); // Base price (regular price)
+                $finalPrice = $product->getFinalPrice(); // After special price, catalog rules, etc.
                     
-                    $compareMessage = "";
+                $compareMessage = "";
 
-                    if ($productSubjectDDC && $categoryNumberMinimal && $categoryNumberMaximum) {
-                        if ($productSubjectDDC >= $categoryNumberMinimal && $productSubjectDDC < $categoryNumberMaximum) {
-                            // ✅ Found a match → assign category
-                            $categoryId = $category->getId();
-                            $productId  = $product->getId();
+                if ($productSubjectDDC && $categoryNumberMinimal && $categoryNumberMaximum) {
+                    if ($productSubjectDDC >= $categoryNumberMinimal && $productSubjectDDC < $categoryNumberMaximum) {
+                        // ✅ Found a match → assign category
+                        $categoryId = $category->getId();
+                        $productId  = $product->getId();
 
-                            try {
-                                $existingCategoryIds = $product->getCategoryIds();
+                        try {
+                            $existingCategoryIds = $product->getCategoryIds();
 
-                                // ✅ Get this category + all its parents
-                                $categoryPathIds = $category->getPathIds(); // e.g. [1,2,6] → root, default, subcategory
-                                // Remove root category (ID 1) if you don’t want to assign it
-                                $categoryPathIds = array_filter($categoryPathIds, function ($id) {
-                                    return $id > 2;
-                                });
+                            // ✅ Get this category + all its parents
+                            $categoryPathIds = $category->getPathIds(); // e.g. [1,2,6] → root, default, subcategory
+                            // Remove root category (ID 1) if you don't want to assign it
+                            $categoryPathIds = array_filter($categoryPathIds, function ($id) {
+                                return $id > 2;
+                            });
 
-                                // Merge with existing categories
-                                $newCategoryIds = array_unique(array_merge($existingCategoryIds, $categoryPathIds));
-                                $product->setCategoryIds($newCategoryIds);
+                            // Merge with existing categories
+                            $newCategoryIds = array_unique(array_merge($existingCategoryIds, $categoryPathIds));
+                            $product->setCategoryIds($newCategoryIds);
 
-                                if (!$product->getPrice() || $product->getPrice() <= 0) {
-                                    $product->setPrice(100); // Set price to 100
-                                }
-                                                                
-                                $this->productRepository->save($product);
-
-
-                                $assignMsg = "   -> MATCH ✅ Assigned category '{$category->getName()}' (ID {$categoryId}) and its parents ["
-                                    . implode(',', $categoryPathIds) . "] to product '{$name}' (ID {$productId})";
-
-
-                                $output->writeln($assignMsg);
-                                $this->logger->info($assignMsg);
-
-                            } catch (\Exception $e) {
-                                $errorMsg = "   -> Error assigning category ID {$categoryId} to product {$name}: " . $e->getMessage();
-                                $output->writeln("<error>$errorMsg</error>");
-                                $this->logger->error($errorMsg);
+                            if (!$product->getPrice() || $product->getPrice() <= 0) {
+                                $product->setPrice(100); // Set price to 100
                             }
+                                                                
+                            $this->productRepository->save($product);
 
 
+                            $assignMsg = "   -> MATCH ✅ Assigned category '{$category->getName()}' (ID {$categoryId}) and its parents ["
+                                . implode(',', $categoryPathIds) . "] to product '{$name}' (ID {$productId})";
 
-//                            $foundProductCategory = true;
+
+                            $output->writeln($assignMsg);
+                            $this->logger->info($assignMsg);
+
+                        } catch (\Exception $e) {
+                            $errorMsg = "   -> Error assigning category ID {$categoryId} to product {$name}: " . $e->getMessage();
+                            $output->writeln("<error>$errorMsg</error>");
+                            $this->logger->error($errorMsg);
                         }
+
                     }
-                    $output->writeln($compareMessage);
                 }
-
-                $message = "Product: {$name} | subjectDDC: " . ($productSubjectDDC ?: 'N/A') ." | einai to subjectDDC < 1000: " . ( $productSubjectDDC ? ($productSubjectDDC<1000) : 'N/A') ;
-                // Print to console
-                $output->writeln($message);
-
-                // Log into system.log
-                $this->logger->info("Product: " . $message);
+                $output->writeln($compareMessage);
             }
+
+            $message = "Product: {$name} | subjectDDC: " . ($productSubjectDDC ?: 'N/A') ." | einai to subjectDDC < 1000: " . ( $productSubjectDDC ? ($productSubjectDDC<1000) : 'N/A') ;
+            // Print to console
+            $output->writeln($message);
+
+            // Log into system.log
+            $this->logger->info("Product: " . $message);
             $count++;
         }
 
