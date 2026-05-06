@@ -13,7 +13,7 @@ use Magento\Framework\App\State;
 
 class SetCategoryToProductsCommand extends Command
 {
-    private const MIN_PRODUCT_ID = 4392;
+    private const DEFAULT_MIN_PRODUCT_ID = 4392;
 
     /**
      * @var LoggerInterface
@@ -60,7 +60,8 @@ class SetCategoryToProductsCommand extends Command
     {
         $this->setName('netsteps:populatebooks:setcategorytoproducts')
             ->setDescription('Loop through all products, get the subjectDDC number and put it to its correct category')
-            ->addOption('start-id', null, InputOption::VALUE_OPTIONAL, 'Start iterating from this product ID (inclusive, minimum ' . self::MIN_PRODUCT_ID . ')', self::MIN_PRODUCT_ID)
+            ->addOption('min-product-id', null, InputOption::VALUE_OPTIONAL, 'Minimum product ID to process (inclusive)', self::DEFAULT_MIN_PRODUCT_ID)
+            ->addOption('start-id', null, InputOption::VALUE_OPTIONAL, 'Start iterating from this product ID (inclusive, cannot be lower than --min-product-id)', self::DEFAULT_MIN_PRODUCT_ID)
             ->addOption('end-id', null, InputOption::VALUE_OPTIONAL, 'Stop iterating at this product ID (inclusive)', 0);
         parent::configure();
     }
@@ -69,7 +70,8 @@ class SetCategoryToProductsCommand extends Command
     {
         // Load all products with their names only
         $productCollection = $this->productCollectionFactory->create();
-        $startId = max(self::MIN_PRODUCT_ID, (int)$input->getOption('start-id'));
+        $minProductId = max(1, (int)$input->getOption('min-product-id'));
+        $startId = max($minProductId, (int)$input->getOption('start-id'));
         $endId = (int)$input->getOption('end-id');
 
         $productCollection->addFieldToFilter('entity_id', ['gteq' => $startId]);
